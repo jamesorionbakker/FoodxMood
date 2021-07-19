@@ -1,0 +1,29 @@
+.login-container {
+    .password {
+        max-width: 150px;
+    }
+    .username {
+        max-width: 150px;
+    }
+    .filler {
+        display: none;
+        height: 8px;
+    }
+    @media (max-width: 767px) {
+        .signup-button {
+            width: 100%;
+        }
+        .login-button {
+            width: 100%;
+        }
+        .filler {
+            display: block;
+        }
+        .password {
+            max-width: 100%;
+        }
+        .username {
+            max-width: 100%;
+        }
+    }
+}

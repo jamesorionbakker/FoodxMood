@@ -1,0 +1,21 @@
+.header-container {
+    position: fixed;
+    top: 0px;
+    background-color: hsl(195, 53%, 79%);
+    .header {
+        height: 68px;
+        min-width: 320px;
+        padding: 15px 0px;
+    }
+    .logo {
+        font-size: 1.5em;
+        min-width: 200px;
+        align-self: center;
+    }
+    .filler {
+        min-height: 10px;
+    }
+    .login {
+        align-self: center;
+    }
+}

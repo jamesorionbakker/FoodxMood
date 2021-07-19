@@ -1,0 +1,47 @@
+.pill {
+    $red: hsl(0, 40%, 60%);
+    $orange: hsl(36, 40%, 60%);
+    $yellow: hsl(73, 40%, 60%);
+    $green: hsl(113, 40%, 60%);
+
+    margin-right: 10px;
+    font-size: 1em;
+    display: inline-block;
+    background-color: hsl(0, 0, 92%);
+    border-radius: 5px;
+
+    .pill-primary {
+        font-weight: 500;
+        display: inline-block;
+        padding: 0px 4px;
+        margin: 0;
+    }
+    .pill-secondary {
+        font-size: 1em;
+        font-weight: 300;
+        border-radius: 5px;
+        background-color: hsl(0, 0, 90%);
+        margin: 0;
+        display: inline-block;
+        padding: 0px 4px;
+    }
+    .red {
+        color: $red;
+    }
+    .orange {
+        color: $orange;
+    }
+    .green {
+        color: $green;
+    }
+    .yellow {
+        color: $yellow;
+    }
+}
+.pill:hover {
+    $hover: hsl(88, 30%, 80%);
+    background-color: $hover;
+    .pill-secondary {
+        background-color: $hover;
+    }
+}

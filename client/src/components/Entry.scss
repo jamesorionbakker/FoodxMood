@@ -1,0 +1,31 @@
+.entry-container {
+    background-color: hsl(200, 12%, 95%);
+    margin-bottom: 10px;
+    padding: 0px;
+    border-radius: 5px;
+
+    .entry-section {
+        padding: 5px 0; 
+        align-content: center;
+    }
+    .section-title {
+        width: 100px;
+    }
+    .entry-heading {
+        background-color: hsl(196, 20%, 90%);
+        padding: 3px 0px;
+
+        span {
+            margin-right: 10px;
+        }
+    }
+
+    
+    .entry-type-secondary {
+        font-weight: 200;
+    }
+    .entry-date {
+        font-weight: 200;
+    }
+    
+}

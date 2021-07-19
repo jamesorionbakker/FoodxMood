@@ -1,0 +1,19 @@
+.current-user {
+    font-size: 1.5em;
+
+    .current-user-name {
+        color: hsl(210, 11%, 50%);
+        float: left;
+        margin-right: 20px;
+    }
+    .settings-link-container {
+        float: left;
+        display: inline;
+    }
+    .fa-bars {
+        color: hsl(210, 11%, 20%);
+    }
+    .fa-bars:hover{
+        color: hsl(210, 11%, 0%);
+    }
+}
