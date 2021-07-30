@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
-import Activity from './Activity'
+import Activity from './activity/Activity'
 
 export default function Dashboard(props){
     let [currentView, setCurrentView] =  useState('activity')
-    let [activityFilter, setActivityFilter] = useState({type: ['meal','healthCheck']})
+    let [dataType, setDataType] = useState('all')
 
     return (
         <div>
-            <Sidebar setCurrentView={setCurrentView} setActivityFilter={setActivityFilter} />
-            {(currentView === 'activity') && <Activity setUserState={props.setUserState} userState={props.userState} activityFilter={activityFilter} />}
+            <Sidebar setCurrentView={setCurrentView} setDataType={setDataType} />
+            {(currentView === 'activity') && <Activity dataType={dataType} />}
         </div>  
     )
 }

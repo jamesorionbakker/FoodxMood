@@ -6,9 +6,16 @@ import cookieParser from 'cookie-parser';
 
 import * as DB from './db.js';
 DB.connect();
-import { login, register, authenticate, getAccess } from './authenticate.js';
-import { authorize } from './authorize.js';
+// import { register, authenticate, getAccess } from './authenticate.js';
+// import { authorize } from './authorize.js';
 import * as autocomplete from './autocomplete.js';
+
+//Routers
+import api from './routes/api.js'
+import login from './routes/login.js'
+import register from './routes/register.js'
+import refreshAccess from './routes/refreshAccess.js'
+
 
 const week = 604800000;
 
@@ -24,52 +31,73 @@ let models = {
     symptom: DB.Symptom,
 };
 
-app.use('/login', authenticate);
-app.post('/login', login);
-
-app.post('/register', register);
-
-app.get('/access', getAccess);
-
+app.use('/login', login);
+app.use('/register', register);
+app.use('/access', refreshAccess);
 app.get('/mealtypes', autocomplete.mealType);
-
 app.post('/ingredients', autocomplete.ingredient);
+app.use('/api', api)
 
-app.use('/ingredient', authorize);
-app.post('/ingredient', (req, res) => {
-    console.log(req.body);
-    let username = req.authUser;
-    let { ingredient } = req.body;
-    DB.addIngredient({
-        name: ingredient,
-        username: username,
-    }).then(() => {
-        console.log('ingredient added')
-        res.sendStatus(200);
-    })
-});
+// app.use('/ingredient', authorize);
+// app.post('/ingredient', (req, res) => {
+//     console.log(req.body);
+//     let username = req.authUser;
+//     let { ingredient } = req.body;
+//     DB.addIngredient({
+//         name: ingredient,
+//         username: username,
+//     })
+//         .then(() => {
+//             console.log('ingredient added');
+//             res.sendStatus(200);
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//             res.sendStatus(500);
+//         });
+// });
 
-app.use('/activity', authorize);
-app.post('/activity', (req, res) => {
-    let username = req.authUser;
-    let collections = req.body.collections.map((collection) => {
-        return models[collection];
-    });
-    DB.queryDB(collections, username).then((data) => {
-        res.json(data);
-    });
-});
-// app.post('/meal', (req, res) => {
-//     req.body.
-// })
+// app.use('/meal', authorize);
+// app.post('/meal', async (req, res) => {
+//     try {
+//         async function getIngredientId(ingredient) {
+//             let query = await DB.Ingredient.findOne({ name: ingredient });
+//             return query._id;
+//         }
 
-// DB.addMeal({
-//     mealType: 'Breakfast',
-//     ingredients: ['sausage', 'eggs', 'hashbrowns'],
-//     time: Date.now(),
-//     prePrepared: false,
-//     fullness: 3,
-// })
+//         let { ingredients, time, type } = req.body;
+//         let username = req.authUser;
+//         let linkedIngredients = [];
+//         for (let name of ingredients) {
+//             let id = await getIngredientId(name);
+//             linkedIngredients.push({ name, id });
+//         }
+//         let meal = new DB.Meal({
+//             ingredients: linkedIngredients,
+//             type,
+//             time,
+//             username,
+//         });
+//         await meal.save();
+//         res.sendStatus(200);
+//     } catch (error) {
+//         console.log(error);
+//         res.sendStatus(500);
+//     }
+// });
+
+// app.use('/activity', authorize);
+// app.post('/activity', (req, res) => {
+//     console.log('sending activity');
+//     let username = req.authUser;
+//     let collections = req.body.collections.map((collection) => {
+//         return models[collection];
+//     });
+//     DB.queryDB(collections, username).then((data) => {
+//         res.json(data);
+//     });
+// });
+
 
 app.listen(process.env.PORT, function () {
     console.log('listening on ' + process.env.PORT);

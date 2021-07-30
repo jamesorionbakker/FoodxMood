@@ -1,0 +1,45 @@
+.entry-container {
+    position: relative;
+    background-color: hsl(196, 20%, 90%);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 0px;
+    .time-container {
+        display: flex;
+        align-items: center;
+    }
+    .entry-section {
+        padding: 5px 0;
+        align-content: center;
+    }
+    .section-title {
+        width: 100px;
+    }
+    .entry-heading {
+        background-color: hsl(196, 20%, 90%);
+        padding: 3px 0px;
+        border-radius: 10px 10px 0px 0px;
+
+        span {
+            margin-right: 10px;
+        }
+    }
+
+    .entry-type-secondary {
+        font-weight: 200;
+    }
+    .entry-time {
+        font-weight: 200;
+    }
+}
+.entry-container::after {
+    position: absolute;
+    top: calc(50% - 10px);
+    left: -10px;
+    content: '';
+    width: 0;
+    height: 0;
+    border-right: solid 10px hsl(196, 20%, 90%);
+    border-bottom: solid 10px transparent;
+    border-top: solid 10px transparent;
+}

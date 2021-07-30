@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import NewHealthCheckForm from './NewHealthCheckForm.jsx';
+import NewMealForm from './NewMealForm';
 import * as API from './common/utils/api.js'
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs().format();
 dayjs.extend(customParseFormat);
 
-export default function AddHealthCheck(props) {
+export default function AddMeal(props) {
 
     const defaultFormData = {
-        symptom: [''],
+        ingredient: [''],
+        mealType: [''],
         time: dayjs().format('HH:mm'),
         date: dayjs().format('YYYY-MM-DD'),
-        mood: null
     };
 
     let [showModal, setShowModal] = useState(false);
-    let [symptomList, setSymptomList] = useState([]);
+    let [ingredientList, setIngredientList] = useState([]);
     let [formData, setFormData] = useState(defaultFormData);
-    let [processing, setProcessing] =  useState(false)
+    let [processing, setProcessing] = useState(false)
     function resetForm() {
         setFormData(defaultFormData);
-        setSymptomList([]);
+        setIngredientList([]);
     }
     function handleClose() {
         setShowModal(false);
@@ -33,20 +33,18 @@ export default function AddHealthCheck(props) {
         let { date, time } = formData;
         let timestamp = dayjs(`${date} ${time}`, 'YYYY-MM-DD HH:mm').unix();
 
-        let newHealthCheck = {
-            symptoms: symptomList,
-            time: timestamp,
-            mood: formData.mood
+        let newMeal = {
+            ingredients: ingredientList,
+            type: formData.mealType,
+            time: timestamp
         };
         try {
             setProcessing(true)
-            await API.post('activity/health-checks', newHealthCheck)
+            await API.post('activity/meals', newMeal)
             setShowModal(false);
             setProcessing(false)
             resetForm();
-        } catch (error) {
-            console.log(error)
-        }
+        } catch (error) {}
     }
     function handleShow() {
         setShowModal(true);
@@ -54,19 +52,19 @@ export default function AddHealthCheck(props) {
 
     return (
         <>
-            <Button onClick={handleShow} className="new-health-check" variant="success">
-                <i className="fas fa-plus"></i> Add Wellness Check
+            <Button onClick={handleShow} className="new-meal" variant="success">
+                <i className="fas fa-plus"></i> Add Meal
             </Button>
 
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add Wellness Check</Modal.Title>
+                    <Modal.Title>Add Meal</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <NewHealthCheckForm
+                    <NewMealForm
                         formData={formData}
-                        symptomList={symptomList}
-                        setSymptomList={setSymptomList}
+                        ingredientList={ingredientList}
+                        setIngredientList={setIngredientList}
                         setFormData={setFormData}
                     />
                 </Modal.Body>
@@ -74,8 +72,8 @@ export default function AddHealthCheck(props) {
                     <Button variant="secondary" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button variant="success" disabled={processing} onClick={handleSubmit}>
-                        {processing ? 'Posting' : 'Post Wellness Check'}
+                    <Button disabled={processing} variant="success" onClick={handleSubmit}>
+                        {processing ? 'Posting' : 'Post Meal'}
                     </Button>
                 </Modal.Footer>
             </Modal>

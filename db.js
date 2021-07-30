@@ -1,19 +1,16 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import mongoose from 'mongoose';
 import {
     mealSchema,
     healthCheckSchema,
     ingredientSchema,
-    symptomDBSchema,
+    symptomSchema,
     userDBSchema,
-    refreshTokenSchema
+    refreshTokenSchema,
 } from './schemas.js';
 
-//user: james
-//pass: biTqP5azG6g2pvxr
-//mongodb+srv://james:<password>@foodmooddb.gevve.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-
-const connectionString =
-    'mongodb+srv://james:biTqP5azG6g2pvxr@foodmooddb.gevve.mongodb.net/foodMoodDB?retryWrites=true&w=majority';
+const connectionString = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@foodmooddb.gevve.mongodb.net/foodMoodDB?retryWrites=true&w=majority`;
 
 export function connect() {
     return mongoose.connect(connectionString, {
@@ -25,9 +22,9 @@ export function connect() {
 export const Meal = mongoose.model('meals', mealSchema);
 export const HealthCheck = mongoose.model('healthCheck', healthCheckSchema);
 export const Ingredient = mongoose.model('ingredient', ingredientSchema);
-export const Symptom = mongoose.model('symptom', symptomDBSchema);
+export const Symptom = mongoose.model('symptom', symptomSchema);
 export const User = mongoose.model('user', userDBSchema);
-export const RefreshToken = mongoose.model('refreshToken', refreshTokenSchema)
+export const RefreshToken = mongoose.model('refreshToken', refreshTokenSchema);
 
 export async function addMeal(meal) {
     let entry = new Meal({
@@ -38,10 +35,8 @@ export async function addMeal(meal) {
         prePrepared: meal.prePrepared,
         time: meal.time,
     });
-    //await connect();
     await entry.save();
     let data = await Meal.find({});
-    //await mongoose.connection.close();
     return data;
 }
 export async function addHealthCheck(healthCheck) {
@@ -61,7 +56,7 @@ export async function addIngredient(ingredient) {
     let entry = new Ingredient({
         name: ingredient.name,
         compounds: ingredient.compounds,
-        username: ingredient.username
+        username: ingredient.username,
     });
     await entry.save();
     let data = await Ingredient.find({});
@@ -101,36 +96,30 @@ export async function addUser({ username, password }) {
     return response;
 }
 
-export async function authenticate(credentials) {
-    //await connect();
-    // let response = await User.findOne(credentials)
-
-    let ValidUser = await User.findOne({username: credentials.username});
-    if (!ValidUser) throw new Error('invalid username');
-    
-    let ValidCredentials = await User.findOne(credentials);
-    if (!ValidCredentials) throw new Error('invalid password')
-
-    //await mongoose.connection.close();
-    return ValidCredentials;
+export async function getUser(credentials) {
+    let validUser = await User.findOne({ username: credentials.username });
+    if (!validUser) throw new Error('invalid username');
+    return validUser;
 }
 
-export async function saveRefreshToken(data){
+export async function saveRefreshToken(data) {
     //await connect();
     let entry = new RefreshToken({
         refreshToken: data.token,
         username: data.username,
-        createdBy: 'na'
-    })
-    let response = await entry.save()
+        createdBy: 'na',
+    });
+    let response = await entry.save();
     //await mongoose.connection.close()
-    return response
+    return response;
 }
 
-export async function validateRefreshToken(refreshToken){
+export async function validateRefreshToken(refreshToken) {
     //await connect();
-    let response = await RefreshToken.findOne()
-    //await mongoose.connection.close()
-    return response
-}
 
+    let exists = await RefreshToken.exists({ refreshToken });
+    if (!exists) throw new Error('refresh token does not exist');
+    let response = await RefreshToken.findOne({ refreshToken });
+    //await mongoose.connection.close()
+    return response.username;
+}

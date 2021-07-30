@@ -1,0 +1,11 @@
+.date-block-container {
+    border-radius: 10px;
+    margin-bottom: 10px;
+    
+    .date-container {
+        height: 100%;
+        width: 75px;
+        display: flex;
+        align-items: center;
+    }
+}

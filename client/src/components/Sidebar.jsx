@@ -1,7 +1,11 @@
 import React from 'react';
 import './Sidebar.scss';
+import { useDispatch } from 'react-redux';
+import { setActivity } from 'components/activity/state/ActivityActions';
 
 export default function Sidebar(props) {
+    let dispatch = useDispatch();
+    let { setCurrentView } = props;
     return (
         <div className="sidebar-container">
             <div className="nav-group">
@@ -10,26 +14,24 @@ export default function Sidebar(props) {
                 </div>
                 <div
                     onClick={() => {
-                        props.setCurrentView('activity');
-                        props.setActivityFilter({type: ['meal','healthCheck']})
+                        setCurrentView('activity');
+                        dispatch(setActivity('all'));
                     }}
                     className="nav-item">
                     <a href="#">All Activity</a>
                 </div>
                 <div
                     onClick={() => {
-                        props.setCurrentView('activity');
-                        props.setActivityFilter({type: ['meal']})
-
+                        setCurrentView('activity');
+                        dispatch(setActivity('meals'));
                     }}
                     className="nav-item">
                     <a href="#">Meals</a>
                 </div>
                 <div
                     onClick={() => {
-                        props.setCurrentView('activity');
-                        props.setActivityFilter({type: ['healthCheck']})
-
+                        setCurrentView('activity');
+                        dispatch(setActivity('health-checks'));
                     }}
                     className="nav-item">
                     <a href="#">Symptoms</a>
