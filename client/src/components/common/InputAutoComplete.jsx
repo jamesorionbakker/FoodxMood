@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import _ from 'lodash';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-import * as API from './common/utils/api.js';
+import * as API from './utils/api.js';
 
 export default function InputAutoComplete(props) {
     let {

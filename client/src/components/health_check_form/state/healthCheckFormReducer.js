@@ -7,24 +7,25 @@ const initialState = {
     new: false,
     edit: false,
     dateString: '',
-    timeString: ''
+    timeString: '',
 };
-
-function condInsert(variable){
-    return variable ? [variable] : []
-}
 
 export default function HealtCheckFormReducer(state = initialState, action) {
     let { payload } = action;
     switch (action.type) {
         case 'HEALTH_CHECK_FORM/EDIT':
-            return {...initialState, ...payload };
+            return { ...initialState, ...payload };
         case 'HEALTH_CHECK_FORM/NEW':
-            return {...initialState, ...payload};
+            return { ...initialState, ...payload };
+        case 'HEALTH_CHECK_FORM/DELETE_SYMPTOM':
+            let symptoms = state.symptoms.filter(
+                (symptom) => symptom !== payload
+            );
+            return { ...state, symptoms };
         case 'HEALTH_CHECK_FORM/CHANGE':
-            return {...state, ...payload};
+            return { ...state, ...payload };
         case 'HEALTH_CHECK_FORM/CLOSE':
-            return {...initialState}
+            return { ...initialState };
         default:
             return state;
     }

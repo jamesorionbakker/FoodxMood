@@ -1,21 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     closeHealthCheckForm,
     formChange,
+    deleteSymptom
 } from './state/healthCheckFormActions';
-import InputAutoComplete from 'components/InputAutoComplete';
+import InputAutoComplete from 'components/common/InputAutoComplete';
 import Pill from 'components/IngredientPill';
 import * as API from 'components/common/utils/api';
 import { stringToUnixTime } from 'components/common/utils/DateHandler';
 import './HealthCheckForm.scss';
 import { setActivity } from 'components/activity/state/ActivityActions';
-import _ from 'lodash'
 
 export default function HealthCheckForm() {
     let [processing, setProcessing] = useState(false);
@@ -34,8 +35,13 @@ export default function HealthCheckForm() {
     }
     function addSymptom(newSymptom) {
         newSymptom = _.startCase(_.lowerCase(newSymptom));
-        console.log(state.symptoms)
-        if (state.symptoms.map(symptom => symptom.description).includes(newSymptom)) return;
+        console.log(state.symptoms);
+        if (
+            state.symptoms
+                .map((symptom) => symptom.description)
+                .includes(newSymptom)
+        )
+            return;
         dispatch(
             formChange({
                 symptoms: [...state.symptoms, { description: newSymptom }],
@@ -47,15 +53,17 @@ export default function HealthCheckForm() {
             setProcessing(true);
             let unixTime = stringToUnixTime(state.dateString, state.timeString);
             let newHealthCheck = {
-                symptoms: state.symptoms.map(
-                    (symptom) => symptom.description
-                ),
+                symptoms: state.symptoms.map((symptom) => symptom.description),
                 mood: state.mood,
                 time: unixTime,
             };
-            if (state.new) await API.post('activity/health-checks', newHealthCheck);
+            if (state.new)
+                await API.post('activity/health-checks', newHealthCheck);
             if (state.edit)
-                await API.put('activity/health-checks/' + state._id, newHealthCheck);
+                await API.put(
+                    'activity/health-checks/' + state._id,
+                    newHealthCheck
+                );
             setProcessing(false);
             handleClose();
             dispatch(setActivity());
@@ -70,7 +78,9 @@ export default function HealthCheckForm() {
         <Modal show={state.show} onHide={handleClose}>
             <Modal.Header closeButton>
                 {state.edit && <Modal.Title>Edit Wellness Check</Modal.Title>}
-                {state.new && <Modal.Title>Post New Wellness Check</Modal.Title>}
+                {state.new && (
+                    <Modal.Title>Post New Wellness Check</Modal.Title>
+                )}
             </Modal.Header>
             <Modal.Body>
                 <div className="health-check-form-container">
@@ -149,6 +159,9 @@ export default function HealthCheckForm() {
                         {state.symptoms.map((symptom, index) => {
                             return (
                                 <Pill
+                                    onClick={() => {
+                                        dispatch(deleteSymptom(symptom));
+                                    }}
                                     index={index}
                                     key={index}
                                     primaryText={symptom.description}

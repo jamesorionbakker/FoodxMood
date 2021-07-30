@@ -7,9 +7,10 @@ import Col from 'react-bootstrap/Col';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 
-import InputAutoComplete from 'components/InputAutoComplete';
+import InputAutoComplete from 'components/common/InputAutoComplete';
 import {
     closeMealForm,
+    deleteIngredient,
     formChange,
 } from './state/MealFormActions';
 import Pill from 'components/IngredientPill';
@@ -127,13 +128,13 @@ export default function MealForm(props) {
                         </Col>
                     </Form.Row>
                     <div className="ingredient-list">
-                        {state.ingredients.map((ingredient, index) => {
-                            console.log(ingredient.name);
+                        {state.ingredients.map((ingredient) => {
                             return (
                                 <Pill
-                                    //handleDelete={handleDelete}
-                                    index={index}
-                                    key={index}
+                                    onClick={()=>{
+                                        dispatch(deleteIngredient(ingredient))
+                                    }}
+                                    key={ingredient.id}
                                     primaryText={ingredient.name}
                                 />
                             );
