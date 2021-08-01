@@ -119,7 +119,7 @@ export default function RegisterForm() {
                                 validationCallback={async (value) => {
                                     if (!/^\w{1,}$/i.test(value))
                                         return { valid: false, error: 'Invalid Username' };
-                                    let response = await fetch('validate/username/' + value);
+                                    let response = await fetch('validation/username/' + value);
                                     let valid = await response.json();
                                     let error = valid
                                         ? 'Username is available'
