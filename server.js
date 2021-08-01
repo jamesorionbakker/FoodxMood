@@ -6,16 +6,15 @@ import cookieParser from 'cookie-parser';
 
 import * as DB from './db.js';
 DB.connect();
-// import { register, authenticate, getAccess } from './authenticate.js';
-// import { authorize } from './authorize.js';
+
 import * as autocomplete from './autocomplete.js';
 
 //Routers
-import api from './routes/api.js'
-import login from './routes/login.js'
-import register from './routes/register.js'
-import refreshAccess from './routes/refreshAccess.js'
-
+import api from './routes/api.js';
+import login from './routes/login.js';
+import register from './routes/register.js';
+import refreshAccess from './routes/refreshAccess.js';
+import logout from './routes/logout.js';
 
 const week = 604800000;
 
@@ -32,72 +31,22 @@ let models = {
 };
 
 app.use('/login', login);
+app.use('/logout', logout);
 app.use('/register', register);
 app.use('/access', refreshAccess);
 app.get('/mealtypes', autocomplete.mealType);
 app.post('/ingredients', autocomplete.ingredient);
-app.use('/api', api)
-
-// app.use('/ingredient', authorize);
-// app.post('/ingredient', (req, res) => {
-//     console.log(req.body);
-//     let username = req.authUser;
-//     let { ingredient } = req.body;
-//     DB.addIngredient({
-//         name: ingredient,
-//         username: username,
-//     })
-//         .then(() => {
-//             console.log('ingredient added');
-//             res.sendStatus(200);
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//             res.sendStatus(500);
-//         });
-// });
-
-// app.use('/meal', authorize);
-// app.post('/meal', async (req, res) => {
-//     try {
-//         async function getIngredientId(ingredient) {
-//             let query = await DB.Ingredient.findOne({ name: ingredient });
-//             return query._id;
-//         }
-
-//         let { ingredients, time, type } = req.body;
-//         let username = req.authUser;
-//         let linkedIngredients = [];
-//         for (let name of ingredients) {
-//             let id = await getIngredientId(name);
-//             linkedIngredients.push({ name, id });
-//         }
-//         let meal = new DB.Meal({
-//             ingredients: linkedIngredients,
-//             type,
-//             time,
-//             username,
-//         });
-//         await meal.save();
-//         res.sendStatus(200);
-//     } catch (error) {
-//         console.log(error);
-//         res.sendStatus(500);
-//     }
-// });
-
-// app.use('/activity', authorize);
-// app.post('/activity', (req, res) => {
-//     console.log('sending activity');
-//     let username = req.authUser;
-//     let collections = req.body.collections.map((collection) => {
-//         return models[collection];
-//     });
-//     DB.queryDB(collections, username).then((data) => {
-//         res.json(data);
-//     });
-// });
-
+app.use('/api', api);
+app.get('/validate/username/:username', async (req, res) => {
+    try {
+        console.log('validatine')
+        let {username} = req.params
+        let response = await DB.User.exists({username})
+        res.json(!response);
+    } catch (error) {
+        res.sendStatus(500)
+    }
+});
 
 app.listen(process.env.PORT, function () {
     console.log('listening on ' + process.env.PORT);

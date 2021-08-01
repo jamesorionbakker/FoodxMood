@@ -2,6 +2,7 @@ import React from 'react';
 import './Sidebar.scss';
 import { useDispatch } from 'react-redux';
 import { setActivity } from 'components/activity/state/ActivityActions';
+import { ViewActivity } from './common/state/ViewActions';
 
 export default function Sidebar(props) {
     let dispatch = useDispatch();
@@ -14,27 +15,24 @@ export default function Sidebar(props) {
                 </div>
                 <div
                     onClick={() => {
-                        setCurrentView('activity');
-                        dispatch(setActivity('all'));
+                        dispatch(ViewActivity('all'))
                     }}
                     className="nav-item">
                     <a href="#">All Activity</a>
                 </div>
                 <div
                     onClick={() => {
-                        setCurrentView('activity');
-                        dispatch(setActivity('meals'));
+                        dispatch(ViewActivity('meals'))
                     }}
                     className="nav-item">
                     <a href="#">Meals</a>
                 </div>
                 <div
                     onClick={() => {
-                        setCurrentView('activity');
-                        dispatch(setActivity('health-checks'));
+                        dispatch(ViewActivity('health-checks'))
                     }}
                     className="nav-item">
-                    <a href="#">Symptoms</a>
+                    <a href="#">Wellness</a>
                 </div>
                 <div className="nav-item-catagory"></div>
             </div>

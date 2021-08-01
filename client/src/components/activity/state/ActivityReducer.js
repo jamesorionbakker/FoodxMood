@@ -1,9 +1,11 @@
-const initialState = { view: 'all', data: {} };
+const initialState = { data: {}, loading: false };
 
 export default function ActivityReducer(state = initialState, action) {
     switch (action.type) {
         case 'ACTIVITY/SET_DATA':
             return { ...action.payload }
+        case 'ACTIVITY/LOADING':
+            return { ...state, loading: true}
         default:
             return state;
     }

@@ -10,24 +10,24 @@ import HealthCheckForm from 'components/health_check_form/HealthCheckForm';
 
 export default function Activity(props) {
     const dispatch = useDispatch();
+    let state = useSelector((state) => state);
 
     useEffect(() => {
         dispatch(setActivity());
-    }, []);
+    }, [state.view]);
 
-    let activityState = useSelector((state) => state.activity);
-    let activityFeed = FeedArray.create(activityState.data);
-
+    let activityFeed = FeedArray.create(state.activity.data);
+    
     return (
         <div className="activity-container">
-            <AddButtonsContainer />
-            <MealForm />
-            <HealthCheckForm />
-            {activityFeed.map((dateBlock, index) => {
-                return (
-                    <DateBlock key={index} index={index} entries={dateBlock} />
-                );
-            })}
+            <div>
+                <AddButtonsContainer />
+                <MealForm />
+                <HealthCheckForm />
+                {activityFeed.map((dateBlock, index) => {
+                    return <DateBlock key={index} index={index} entries={dateBlock} />;
+                })}
+            </div>
         </div>
     );
 }

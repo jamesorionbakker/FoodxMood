@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
@@ -69,7 +70,7 @@ export default function MealForm(props) {
             </Modal.Header>
             <Modal.Body>
                 <div className="meal-form-container">
-                    <Form.Row>
+                    <Row>
                         <Col xs={12}>
                             <InputAutoComplete
                                 submit={(value) => {
@@ -84,11 +85,11 @@ export default function MealForm(props) {
                                     'Drink',
                                 ]}
                                 defaultInputValue={state.mealType}
-                                //placeholder="Meal Type (ie: Breakfast, Lunch, Dinner)"
+                                placeholder="Meal Type (ie: Breakfast, Lunch, Dinner)"
                             />
                         </Col>
-                    </Form.Row>
-                    <Form.Row>
+                    </Row>
+                    <Row>
                         <Col xs={6}>
                             <Form.Control
                                 type="date"
@@ -115,8 +116,8 @@ export default function MealForm(props) {
                                 }}
                             />
                         </Col>
-                    </Form.Row>
-                    <Form.Row>
+                    </Row>
+                    <Row>
                         <Col>
                             <InputAutoComplete
                                 submit={addIngredient}
@@ -126,7 +127,7 @@ export default function MealForm(props) {
                                 placeholder="Add Ingredients One at a Time"
                             />
                         </Col>
-                    </Form.Row>
+                    </Row>
                     <div className="ingredient-list">
                         {state.ingredients.map((ingredient) => {
                             return (

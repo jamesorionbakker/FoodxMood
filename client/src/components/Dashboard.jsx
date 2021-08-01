@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import Activity from './activity/Activity'
+import { useSelector } from 'react-redux';
 
 export default function Dashboard(props){
-    let [currentView, setCurrentView] =  useState('activity')
-    let [dataType, setDataType] = useState('all')
+    let state = useSelector(state => state.view)
 
     return (
-        <div>
-            <Sidebar setCurrentView={setCurrentView} setDataType={setDataType} />
-            {(currentView === 'activity') && <Activity dataType={dataType} />}
+        <div style={{position: 'relative'}}>
+            <Sidebar />
+            {(state.activity.active) && <Activity />}
+
         </div>  
     )
 }

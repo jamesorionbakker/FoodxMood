@@ -1,0 +1,19 @@
+div.user-menu {
+    width: auto;
+    .offcanvas-body {
+        position: relative;
+    }
+    .options-container {
+        margin-right: 30px;
+    }
+    .logout-button-container {
+        padding: 15px;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+    }
+    button.logout {
+        width: 100%
+    }
+}

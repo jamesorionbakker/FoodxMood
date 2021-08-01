@@ -1,14 +1,25 @@
 import * as API from 'components/common/utils/api.js';
 
 
-export  function setActivity(view) {
+function loadingActivity(){
+    return {
+        type: 'ACTIVITY/LOADING'
+    }
+}
+
+export  function setActivity(filter) {
     return async (dispatch, getState) => {
-        if (!view) view = getState().activity.view;
-        let response = await API.get(`activity/${view}`);
-        let data = Object.fromEntries(response.map((entry)=>{ //CONVERTS ARRAY TO OBJECT KEYED BY _ID
-            let { _id } = entry
-            return [_id, entry]
-        }))
-        dispatch({type: 'ACTIVITY/SET_DATA', payload: {view, data}})
+        try {
+            dispatch(loadingActivity())
+            let filter = getState().view.activity.filter
+            let response = await API.get(`activity/${filter}`);
+            let data = Object.fromEntries(response.map((entry)=>{ //CONVERTS ARRAY TO OBJECT KEYED BY _ID
+                let { _id } = entry
+                return [_id, entry]
+            }))
+            dispatch({type: 'ACTIVITY/SET_DATA', payload: {data, loading: false}})
+        } catch (error) {
+            console.log(error)
+        }
     };
 }

@@ -10,9 +10,9 @@ const year = 1000 * 60 * 60 * 24 * 365;
 
 router.post('/', async (req, res) => {
     try {
-        let { username, password } = req.body.credentials;
+        let { username, password } = req.body;
         let { password: savedPassword } = await DB.getUser(
-            req.body.credentials
+            req.body
         );
         let valid = await bcrypt.compareSync(password, savedPassword)
         if(!valid) throw new Error('invalid password')
