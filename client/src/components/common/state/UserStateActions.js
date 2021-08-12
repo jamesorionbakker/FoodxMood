@@ -1,6 +1,6 @@
 import * as accessToken from 'components/common/utils/accessToken.js';
 import UserState from 'components/common/utils/userState';
-import { showLoginForm } from 'components/login_form/state/loginFormActions';
+import { hideUserOptions } from 'components/user_menu/state/UserMenuActions';
 import { getHeaders } from '../utils/api';
 
 export function setUserState(payload) {
@@ -18,7 +18,6 @@ export function attemptLogIn() {
             dispatch(setUserState(new UserState(token)));
         } catch (error) {
             console.log('no refresh token, login required');
-            dispatch(showLoginForm());
             dispatch(setUserState(new UserState()));
         }
     };
@@ -29,11 +28,11 @@ export function LogOut() {
         const token = () => getState().UserState.accessToken;
         try {
             if (token().expired()) await dispatch(attemptLogIn());
-            let response = await fetch('/logout', {
+            await fetch('/logout', {
                 headers: getHeaders(),
             });
+            dispatch(hideUserOptions())
             dispatch(setUserState(new UserState()));
-            dispatch(showLoginForm())
         } catch (error) {
             console.error(error)
         }

@@ -50,7 +50,6 @@ export default function UserMenu() {
                             onClick={ async () => {
                                 setLoggingOut(true)
                                 await dispatch(LogOut());
-                                dispatch(hideUserOptions())
                             }}>
                             {loggingOut ? 'Logging Out' : 'Log Out'}
                         </Button>

@@ -1,14 +1,16 @@
 import React from 'react';
-import Login from '../login_form/LoginForm';
+import LoginForm from '../login_form/LoginForm';
 import './Header.scss';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import CurrentUser from 'components/header/CurrentUser'
+//import CurrentUser from 'components/header/CurrentUser'
 import UserMenu from 'components/user_menu/UserMenu';
+import { useSelector } from 'react-redux';
 
 
-export default function Header(props) {
+export default function Header() {
+    let userState = useSelector(state => state.UserState)
 
     return (
         <Container fluid className="header-container">
@@ -18,7 +20,7 @@ export default function Header(props) {
                 </Col>
                 <Col xs={12} md={true} className="filler"></Col>
                 <Col xs={12} md={'auto'} className="login">
-                    {props.user.isLoggedIn ? <UserMenu /> : <Login/>}
+                    {userState.isLoggedIn ? <UserMenu /> : <LoginForm/>}
                 </Col>
             </Row>
             

@@ -13,7 +13,7 @@ function App() {
 
     return (
         <div>
-            <Header user={userState} />
+            <Header />
 
             {userState.isLoggedIn && (
                 <Dashboard/>
