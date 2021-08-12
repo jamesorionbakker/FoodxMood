@@ -38,31 +38,31 @@ export default function RegisterForm() {
         dispatch(validateRegisterForm({ [name]: { value, valid, touched: true, error } }));
     }
 
-    function Input({ name, type = 'input', placeholder, validationCallback, capitalize = false }) {
-        return (
-            <Form.Group>
-                <Form.Control
-                    name={name}
-                    value={state[name].value}
-                    isInvalid={state[name].touched && !state[name].valid}
-                    isValid={state[name].touched && state[name].valid}
-                    onBlur={(e) => {
-                        let value = e.target.value;
-                        if (value) handleBlur(e, validationCallback);
-                    }}
-                    onChange={(e) => {
-                        let { name, value } = e.target;
-                        if (capitalize) value = _.startCase(_.lowerCase(value));
-                        handleChange({ name, value });
-                    }}
-                    type={type}
-                    placeholder={placeholder}
-                />
-                <Form.Control.Feedback type="invalid">{state[name].error}</Form.Control.Feedback>
-                <Form.Control.Feedback type="valid">{state[name].error}</Form.Control.Feedback>
-            </Form.Group>
-        );
-    }
+    // function Input({ name, type = 'input', placeholder, validationCallback, capitalize = false }) {
+    //     return (
+    //         <Form.Group>
+    //             <Form.Control
+    //                 name={name}
+    //                 value={state[name].value}
+    //                 isInvalid={state[name].touched && !state[name].valid}
+    //                 isValid={state[name].touched && state[name].valid}
+    //                 onBlur={(e) => {
+    //                     let value = e.target.value;
+    //                     if (value) handleBlur(e, validationCallback);
+    //                 }}
+    //                 onChange={(e) => {
+    //                     let { name, value } = e.target;
+    //                     if (capitalize) value = _.startCase(_.lowerCase(value));
+    //                     handleChange({ name, value });
+    //                 }}
+    //                 type={type}
+    //                 placeholder={placeholder}
+    //             />
+    //             <Form.Control.Feedback type="invalid">{state[name].error}</Form.Control.Feedback>
+    //             <Form.Control.Feedback type="valid">{state[name].error}</Form.Control.Feedback>
+    //         </Form.Group>
+    //     );
+    // }
 
     return (
         <Modal show={state.show} onHide={() => dispatch(hideRegisterForm())}>
@@ -79,7 +79,7 @@ export default function RegisterForm() {
                                 name="firstName"
                                 placeholder="First Name"
                                 validationCallback={validate.name}
-                                capitalize
+                                
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
