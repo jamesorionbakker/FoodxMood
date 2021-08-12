@@ -7,14 +7,14 @@ import './UserMenu.scss';
 import { LogOut } from 'components/common/state/UserStateActions';
 import { useState } from 'react';
 
-export default function UserMenu(props) {
+export default function UserMenu() {
     let state = useSelector((state) => state.userMenu);
     let [loggingOut, setLoggingOut] = useState(false);
     const dispatch = useDispatch();
     return (
         <div>
             <h4>
-                Hello, {useSelector((state) => state.UserState.username)}
+                Hello, {useSelector((state) => state.UserState.firstName)}
                 <Button
                     variant="outline-dark"
                     style={{ marginLeft: '20px' }}
@@ -50,7 +50,7 @@ export default function UserMenu(props) {
                             onClick={ async () => {
                                 setLoggingOut(true)
                                 await dispatch(LogOut());
-                                setLoggingOut(false)
+                                dispatch(hideUserOptions())
                             }}>
                             {loggingOut ? 'Logging Out' : 'Log Out'}
                         </Button>

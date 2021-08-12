@@ -5,27 +5,53 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import { useDispatch, useSelector } from 'react-redux';
-import { hideRegisterForm, setRegisterForm, validateRegisterForm } from './state/registerFormActions';
+import {
+    hideRegisterForm,
+    setRegisterForm,
+    touchAllInputs,
+    validateRegisterForm,
+} from './state/registerFormActions';
 import Button from 'react-bootstrap/Button';
 import './RegisterForm.scss';
 import * as validate from 'components/common/utils/formValidation';
-import _ from 'lodash';
 import RegisterInput from './state/RegisterInput';
+import { AccessToken } from '../common/utils/accessToken.js';
+import UserState from 'components/common/utils/userState';
+import { setUserState } from 'components/common/state/UserStateActions';
 
 export default function RegisterForm() {
     let [processing, setProcessing] = useState(false);
     const dispatch = useDispatch();
     let state = useSelector((state) => state.registerForm);
 
-    function handleSubmit(e) {
-        e.preventDefault()
-        if(!state.password.valid) return
-        if(!state.passwordVerify.valid) return
-        if(!state.username.valid) return
-        if(!state.firstName.valid) return
-        if(!state.lastName.valid) return
-        if(!state.username.valid) return
-        console.log('good to go')
+    async function handleSubmit(e) {
+        e.preventDefault();
+        dispatch(touchAllInputs());
+        if (!state.password.valid) return;
+        if (!state.passwordVerify.valid) return;
+        if (!state.username.valid) return;
+        if (!state.firstName.valid) return;
+        if (!state.lastName.valid) return;
+        let registerPayload = {
+            username: state.username.value,
+            firstName: state.firstName.value,
+            lastName: state.lastName.value,
+            password: state.password.value
+        };
+        console.log(registerPayload)
+        
+        try {
+            let response = await fetch('/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(registerPayload),
+            });
+            console.log('success')
+            let token = new AccessToken(await response.json());
+            dispatch(setUserState(new UserState(token)))
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async function handleChange({ name, value }) {
@@ -37,32 +63,6 @@ export default function RegisterForm() {
         let { valid, error } = await validationCallback(value);
         dispatch(validateRegisterForm({ [name]: { value, valid, touched: true, error } }));
     }
-
-    // function Input({ name, type = 'input', placeholder, validationCallback, capitalize = false }) {
-    //     return (
-    //         <Form.Group>
-    //             <Form.Control
-    //                 name={name}
-    //                 value={state[name].value}
-    //                 isInvalid={state[name].touched && !state[name].valid}
-    //                 isValid={state[name].touched && state[name].valid}
-    //                 onBlur={(e) => {
-    //                     let value = e.target.value;
-    //                     if (value) handleBlur(e, validationCallback);
-    //                 }}
-    //                 onChange={(e) => {
-    //                     let { name, value } = e.target;
-    //                     if (capitalize) value = _.startCase(_.lowerCase(value));
-    //                     handleChange({ name, value });
-    //                 }}
-    //                 type={type}
-    //                 placeholder={placeholder}
-    //             />
-    //             <Form.Control.Feedback type="invalid">{state[name].error}</Form.Control.Feedback>
-    //             <Form.Control.Feedback type="valid">{state[name].error}</Form.Control.Feedback>
-    //         </Form.Group>
-    //     );
-    // }
 
     return (
         <Modal show={state.show} onHide={() => dispatch(hideRegisterForm())}>
@@ -77,9 +77,9 @@ export default function RegisterForm() {
                             <RegisterInput
                                 state={state.firstName}
                                 name="firstName"
+                                validated
                                 placeholder="First Name"
                                 validationCallback={validate.name}
-                                
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
@@ -88,6 +88,7 @@ export default function RegisterForm() {
                             <RegisterInput
                                 state={state.lastName}
                                 name="lastName"
+                                validated
                                 placeholder="Last Name"
                                 validationCallback={validate.name}
                                 capitalize
@@ -98,14 +99,14 @@ export default function RegisterForm() {
                     </Row>
                     <Row>
                         <Col xs={12}>
-                            <RegisterInput
+                            {/* <RegisterInput
                                 state={state.email}
                                 name="email"
                                 placeholder="Email"
-                                validationCallback={validate.email}
+                                validationCallback={(validate.email)}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                            />
+                            /> */}
                         </Col>
                     </Row>
                     <hr />
@@ -115,6 +116,7 @@ export default function RegisterForm() {
                             <RegisterInput
                                 state={state.username}
                                 name="username"
+                                validated
                                 placeholder="Username"
                                 validationCallback={async (value) => {
                                     if (!/^\w{1,}$/i.test(value))
@@ -134,8 +136,10 @@ export default function RegisterForm() {
                     <Row>
                         <Col xs={12}>
                             <RegisterInput
+                                type="password"
                                 state={state.password}
                                 name="password"
+                                validated
                                 placeholder="Password"
                                 validationCallback={validate.password}
                                 onChange={handleChange}
@@ -146,8 +150,10 @@ export default function RegisterForm() {
                     <Row>
                         <Col xs={12}>
                             <RegisterInput
+                                type="password"
                                 state={state.passwordVerify}
                                 name="passwordVerify"
+                                validated
                                 placeholder="Verify Password"
                                 validationCallback={(value) => {
                                     let valid = state.password.value === value;
@@ -164,7 +170,11 @@ export default function RegisterForm() {
                     <Button variant="secondary" onClick={() => dispatch(hideRegisterForm())}>
                         Cancel
                     </Button>
-                    <Button onClick={handleSubmit} type="submit" disabled={processing} variant="success">
+                    <Button
+                        onClick={handleSubmit}
+                        type="submit"
+                        disabled={processing}
+                        variant="success">
                         {processing ? 'Creating Account' : 'Create Account'}
                     </Button>
                 </Modal.Footer>

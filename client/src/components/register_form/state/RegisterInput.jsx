@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 
 export default function RegisterInput(props){
-    let {name, state, validationCallback, placeholder, capitalize, type } = props
+    let {name, state, validationCallback, placeholder, capitalize, type, validated } = props
     let handleBlur = props.onBlur
     let handleChange = props.onChange
     return (
@@ -12,8 +12,8 @@ export default function RegisterInput(props){
             <Form.Control
                 name={name}
                 value={state.value}
-                isInvalid={state.touched && !state.valid}
-                isValid={state.touched && state.valid}
+                isInvalid={validated && state.touched && !state.valid}
+                isValid={validated && state.touched && state.valid}
                 onBlur={(e) => {
                     let value = e.target.value
                     if (value) handleBlur(e, validationCallback);

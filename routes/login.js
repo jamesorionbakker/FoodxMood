@@ -11,12 +11,12 @@ const year = 1000 * 60 * 60 * 24 * 365;
 router.post('/', async (req, res) => {
     try {
         let { username, password } = req.body;
-        let { password: savedPassword } = await DB.getUser(
+        let { password: savedPassword, firstName, lastName } = await DB.getUser(
             req.body
         );
         let valid = await bcrypt.compareSync(password, savedPassword)
         if(!valid) throw new Error('invalid password')
-        const accessToken = generateAccessToken({ username });
+        const accessToken = generateAccessToken({ username, firstName, lastName });
         const refreshToken = generateRefreshToken({ username });
         await DB.saveRefreshToken({ token: refreshToken, username });
         res.cookie('refreshToken', refreshToken, {

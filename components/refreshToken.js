@@ -8,14 +8,15 @@ export function generate(user) {
     });
 }
 export async function authenticate(req, res) {
+    console.log('refreshing access token')
     try {
         let refreshToken = req.cookies.refreshToken;
         if (!refreshToken) {
             throw new Error('No refresh token');
         }
-        let username = await DB.validateRefreshToken(refreshToken);
-        let user = { username };
-        let accessToken = await generateAccessToken(user);
+        let {username} = await DB.validateRefreshToken(refreshToken);
+        let { firstName, lastName } = await DB.User.findOne({username})
+        let accessToken = await generateAccessToken({username, firstName, lastName});
         res.json(accessToken);
     } catch (error) {
         res.status(403);

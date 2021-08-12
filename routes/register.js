@@ -10,9 +10,13 @@ const year = 1000 * 60 * 60 * 24 * 365;
 
 router.post('/', async (req, res) => {
     try {
-        let { username, password } = req.body.credentials;
+        let { username, password, firstName, lastName } = req.body;
+        console.log(firstName)
         let hashedPassword = await bcrypt.hash(password, 10);
-        await DB.addUser({ username, password: hashedPassword });
+
+        let newUser = new DB.User({ username, password: hashedPassword, firstName, lastName })
+        await newUser.save()
+        // await DB.addUser({ username, password: hashedPassword, firstName, lastName });
         const refreshToken = generateRefreshToken({ username });
         DB.saveRefreshToken({ token: refreshToken, username });
         res.cookie('refreshToken', refreshToken, {
@@ -20,8 +24,9 @@ router.post('/', async (req, res) => {
             secure: true,
             maxAge: year,
         });
-        res.json(generateAccessToken({ username }));
+        res.json(generateAccessToken({ username, firstName, lastName }));
     } catch (error) {
+        console.log(error)
         res.status(500)
     }
 });

@@ -20,3 +20,8 @@ export function validateRegisterForm(payload){
         payload
     }
 }
+export function touchAllInputs(){
+    return {
+        type: "REGISTER_FORM/TOUCH_ALL",
+    }
+}

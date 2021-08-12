@@ -85,16 +85,16 @@ export async function queryDB(collections, username, filter = {}) {
     return response;
 }
 
-export async function addUser({ username, password }) {
-    let user = new User({
-        username,
-        password,
-    });
-    //await connect();
-    let response = await user.save();
-    //await mongoose.connection.close();
-    return response;
-}
+// export async function addUser({ username, password, firstName, lastName }) {
+//     let user = new User({
+//         username,
+//         password,
+//     });
+//     //await connect();
+//     let response = await user.save();
+//     //await mongoose.connection.close();
+//     return response;
+// }
 
 export async function getUser(credentials) {
     let validUser = await User.findOne({ username: credentials.username });
@@ -115,11 +115,9 @@ export async function saveRefreshToken(data) {
 }
 
 export async function validateRefreshToken(refreshToken) {
-    //await connect();
 
     let exists = await RefreshToken.exists({ refreshToken });
     if (!exists) throw new Error('refresh token does not exist');
-    let response = await RefreshToken.findOne({ refreshToken });
-    //await mongoose.connection.close()
-    return response.username;
+    return await RefreshToken.findOne({ refreshToken });
+
 }

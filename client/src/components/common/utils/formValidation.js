@@ -15,7 +15,7 @@ export function email(value){
 }
 
 export function name(value){
-    let valid = /^\w{1,}$/i.test(value)
+    let valid = /^\w{1,}/i.test(value)
     let error = valid ? '' : 'Invalid Name'
     return {valid, error}
 }

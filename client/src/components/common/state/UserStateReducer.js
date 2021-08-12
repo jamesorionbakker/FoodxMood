@@ -1,4 +1,4 @@
-import UserState from '../utils/userState'
+import UserState from 'components/common/utils/userState'
 
 const initialState = new UserState()
 
