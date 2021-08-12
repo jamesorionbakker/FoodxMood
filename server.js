@@ -21,7 +21,7 @@ import logout from './routes/logout.js';
 import validation from './routes/validation.js'
 
 //middleware
-app.use(express.static(__dirname + '/client/build'));
+app.use(express.static('./client/build'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
