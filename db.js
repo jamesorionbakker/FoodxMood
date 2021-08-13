@@ -45,10 +45,8 @@ export async function addHealthCheck(healthCheck) {
         mood: healthCheck.mood,
         time: healthCheck.time,
     });
-    //await connect();
     await entry.save();
     let data = await HealthCheck.find({});
-    //await mongoose.connection.close();
     return data;
 }
 
@@ -67,34 +65,19 @@ export async function addSymptom(symptom) {
     let entry = new Symptom({
         description: symptom,
     });
-    //await connect();
     await entry.save();
     let data = await Symptom.find({});
-    //await mongoose.connection.close();
     return data;
 }
 
 export async function queryDB(collections, username, filter = {}) {
-    //await connect();
     let response = [];
     for (let collection of collections) {
         let data = await collection.find({ username, ...filter });
         response.push(...data);
     }
-    //await mongoose.connection.close();
     return response;
 }
-
-// export async function addUser({ username, password, firstName, lastName }) {
-//     let user = new User({
-//         username,
-//         password,
-//     });
-//     //await connect();
-//     let response = await user.save();
-//     //await mongoose.connection.close();
-//     return response;
-// }
 
 export async function getUser(credentials) {
     let validUser = await User.findOne({ username: credentials.username });
@@ -103,21 +86,12 @@ export async function getUser(credentials) {
 }
 
 export async function saveRefreshToken(data) {
-    //await connect();
     let entry = new RefreshToken({
         refreshToken: data.token,
         username: data.username,
         createdBy: 'na',
     });
     let response = await entry.save();
-    //await mongoose.connection.close()
     return response;
 }
 
-// export async function validateRefreshToken(refreshToken) {
-
-//     let exists = await RefreshToken.exists({ refreshToken });
-//     if (!exists) throw new Error('refresh token does not exist');
-//     return await RefreshToken.findOne({ refreshToken });
-
-// }
