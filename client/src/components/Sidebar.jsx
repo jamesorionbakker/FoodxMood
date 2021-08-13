@@ -1,12 +1,10 @@
 import React from 'react';
 import './Sidebar.scss';
 import { useDispatch } from 'react-redux';
-import { setActivity } from 'components/activity/state/ActivityActions';
 import { ViewActivity } from './common/state/ViewActions';
 
 export default function Sidebar(props) {
     let dispatch = useDispatch();
-    let { setCurrentView } = props;
     return (
         <div className="sidebar-container">
             <div className="nav-group">

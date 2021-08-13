@@ -39,17 +39,19 @@ export default function RegisterForm() {
             password: state.password.value
         };
         console.log(registerPayload)
-        
+        setProcessing(true)
         try {
             let response = await fetch('/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(registerPayload),
             });
+            if(response.status !== 200) throw new Error(`Error ${response.status}`)
             console.log('success')
             let token = new AccessToken(await response.json());
             dispatch(setUserState(new UserState(token)))
         } catch (error) {
+            setProcessing(false)
             console.log(error)
         }
     }
