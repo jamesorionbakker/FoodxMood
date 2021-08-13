@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import './IngredientPill.scss';
 
 export default function IngredientPill(props) {
