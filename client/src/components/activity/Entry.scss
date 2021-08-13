@@ -1,11 +1,11 @@
-$health-check-bg: hsl(40, 33%, 80%);
-$meal-bg: hsl(40, 33%, 90%);
-$orig-bg: #EBF094;
+@import 'styles/_colors.scss';
 div.entry-container {
     margin: 10px 0px;
 }
-.time-container {
-    opacity: .8;
+div.time-container {
+    min-width: 75px;
+    max-width: 75px;
+    opacity: 0.8;
     display: flex;
     align-items: center;
 }
@@ -32,6 +32,10 @@ div.entry-data-container {
     }
     .entry-time {
         font-weight: 200;
+    }
+    .manage-entry-col {
+        display: flex;
+        align-items: center;
     }
 }
 .entry-data-container::after {

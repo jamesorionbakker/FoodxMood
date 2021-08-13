@@ -1,14 +1,10 @@
-.pill {
-    $red: #ff5c4d;
-    $orange: #ff9636;
-    $yellow: hsl(73, 40%, 60%);
-    $green: #dad870;
+@import 'styles/_colors.scss';
 
+.pill {
     margin-right: 10px;
     margin-bottom: 5px;
     font-size: 1em;
     display: inline-block;
-    // background-color: hsl(0, 0, 92%);
 
     .pill-primary {
         font-weight: 500;
@@ -16,20 +12,8 @@
         padding: 0px 4px;
         margin: 0;
         border-radius: 5px;
-        background-color: hsl(40, 53%, 86%);
+        background-color: $entry-pill-bg;
     }
-    // .red {
-    //     background-color: $red;
-    // }
-    // .orange {
-    //     background-color: $orange;
-    // }
-    // .green {
-    //     background-color: $green;
-    // }
-    // .yellow {
-    //     background-color: $yellow;
-    // }
 }
 .pill:hover {
     $hover: hsl(88, 30%, 80%);
