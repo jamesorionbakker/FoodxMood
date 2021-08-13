@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import _ from 'lodash';
 
 export default function RegisterInput(props) {
-    let { name, state, validationCallback, placeholder, capitalize, type, validated, trimWhitespace} = props;
+    let { name, state, validationCallback, placeholder, capitalize, type, validated, trimWhitespace, lowercase} = props;
     let handleBlur = props.onBlur;
     let handleChange = props.onChange;
     return (
@@ -21,6 +21,7 @@ export default function RegisterInput(props) {
                     let { name, value } = e.target;
                     //if capitalize prop is true, and last character typed is a letter char
                     if (trimWhitespace) value = _.trim(value)
+                    if (lowercase) value = _.toLower(value)
                     if (capitalize && /\w$/.test(value)) {
                         value = value.split(/([\s-_.])/).reduce((acc, substring) => {
                             return acc + _.upperFirst(substring);

@@ -18,6 +18,7 @@ import RegisterInput from './state/RegisterInput';
 import { AccessToken } from '../common/utils/accessToken.js';
 import UserState from 'components/common/utils/userState';
 import { setUserState } from 'components/common/state/UserStateActions';
+import _ from 'lodash';
 
 export default function RegisterForm() {
     let [processing, setProcessing] = useState(false);
@@ -33,10 +34,10 @@ export default function RegisterForm() {
         if (!state.firstName.valid) return;
         if (!state.lastName.valid) return;
         let registerPayload = {
-            username: state.username.value,
-            firstName: state.firstName.value,
-            lastName: state.lastName.value,
-            password: state.password.value
+            username: _.toLower(_.trim(state.username.value)),
+            firstName: _.trim(state.firstName.value),
+            lastName: _.trim(state.lastName.value),
+            password: _.trim(state.password.value)
         };
         console.log(registerPayload)
         setProcessing(true)
@@ -121,6 +122,7 @@ export default function RegisterForm() {
                                 name="username"
                                 validated
                                 trimWhitespace
+                                lowercase
                                 placeholder="Username"
                                 validationCallback={async (value) => {
                                     if (!/^\w{1,}$/i.test(value))

@@ -16,7 +16,6 @@ router.post('/', async (req, res) => {
 
         let newUser = new DB.User({ username, password: hashedPassword, firstName, lastName })
         await newUser.save()
-        // await DB.addUser({ username, password: hashedPassword, firstName, lastName });
         const refreshToken = generateRefreshToken({ username });
         DB.saveRefreshToken({ token: refreshToken, username });
         res.cookie('refreshToken', refreshToken, {
