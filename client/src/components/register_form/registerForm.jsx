@@ -79,6 +79,7 @@ export default function RegisterForm() {
                             <RegisterInput
                                 state={state.firstName}
                                 name="firstName"
+                                capitalize
                                 validated
                                 placeholder="First Name"
                                 validationCallback={validate.name}
@@ -119,6 +120,7 @@ export default function RegisterForm() {
                                 state={state.username}
                                 name="username"
                                 validated
+                                trimWhitespace
                                 placeholder="Username"
                                 validationCallback={async (value) => {
                                     if (!/^\w{1,}$/i.test(value))
