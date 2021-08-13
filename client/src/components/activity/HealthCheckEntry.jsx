@@ -17,34 +17,34 @@ export default function HealthCheckEntry(props) {
                     {dayjs.unix(time).format('h:mm A')}
                 </Col>
                 <Col xs={true} className="entry-data-container health-check-entry-container">
-                    <Row className="entry-heading">
+                    <Row>
                         <Col>
-                            <h5>❤️ Wellness Check</h5>
+                            <Row className="entry-heading">
+                                <Col>
+                                    <h5>
+                                        <span className="emoji">❤️</span>Wellness Check
+                                    </h5>
+                                </Col>
+                            </Row>
+                            <Row className="entry-section">
+                                <Col xs="auto">
+                                    <div className="section-title">Symptoms:</div>
+                                </Col>
+                                <Col xs={true}>
+                                    {symptoms.map((symptom, index) => {
+                                        return (
+                                            <Pill
+                                                key={index}
+                                                text={symptom.description}
+                                                color="green"
+                                            />
+                                        );
+                                    })}
+                                </Col>
+                            </Row>
                         </Col>
-                        <Col xs="auto">
+                        <Col xs="auto" className="manage-entry-col">
                             <ManageEntry entry={entry} />
-                        </Col>
-                    </Row>
-                    <Row className="entry-section">
-                        <Col xs="auto">
-                            <div className="section-title">Symptoms:</div>
-                        </Col>
-                        <Col xs={true}>
-                            {symptoms.map((symptom, index) => {
-                                let severityEnum = {
-                                    1: 'Mild',
-                                    2: 'Moderate',
-                                    3: 'Severe',
-                                };
-                                const colorEnum = {
-                                    1: 'yellow',
-                                    2: 'orange',
-                                    3: 'red',
-                                };
-                                return (
-                                    <Pill key={index} text={symptom.description} color="green" />
-                                );
-                            })}
                         </Col>
                     </Row>
                 </Col>
