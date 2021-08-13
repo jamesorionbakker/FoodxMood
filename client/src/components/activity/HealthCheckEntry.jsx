@@ -6,7 +6,7 @@ import Pill from '../Pill.jsx';
 import './Entry.scss';
 import ManageEntry from './ManageEntry.jsx';
 
-export default function (props) {
+export default function HealthCheckEntry (props) {
     let { entry } = props;
     let { symptoms, mealType, type, time, _id } = entry;
     return (
