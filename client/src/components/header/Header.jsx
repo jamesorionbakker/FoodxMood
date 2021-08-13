@@ -16,7 +16,7 @@ export default function Header() {
         <Container fluid className="header-container">
             <Row className="header">
                 <Col xs={12} sm="auto" className="logo">
-                    Food <span className="x" >x</span> Mood
+                    <h4>Food <span className="x" >x</span> Mood</h4>
                 </Col>
                 <Col xs={12} md={true} className="filler"></Col>
                 <Col xs={12} md={'auto'} className="login">
