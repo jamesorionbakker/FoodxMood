@@ -10,6 +10,19 @@ import './Entry.scss';
 export default function MealEntry(props) {
     let { entry } = props;
     let { ingredients, mealType, time } = entry;
+
+    function getEmoji(mealType){
+        const mealEnum = {
+            'Breakfast': '🍳',
+            'Lunch': '🥪',
+            'Dessert': '🧁',
+            'Snack': '🍇',
+            'Dinner': '🍴',
+            'Drink': '☕'
+        }
+        return mealEnum[mealType];
+    }
+
     return (
         <Container className="entry-container" fluid>
             <Row>
@@ -18,7 +31,7 @@ export default function MealEntry(props) {
                         <Row className="entry-heading">
                             <Col>
                                 <h5>
-                                    {mealType}
+                                {getEmoji(mealType)} {mealType}
                                 </h5>
                             </Col>
                             <Col xs="auto">
