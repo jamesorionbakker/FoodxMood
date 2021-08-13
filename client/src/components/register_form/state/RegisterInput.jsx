@@ -22,8 +22,8 @@ export default function RegisterInput(props) {
                     //if capitalize prop is true, and last character typed is a letter char
                     if (trimWhitespace) value = _.trim(value)
                     if (capitalize && /\w$/.test(value)) {
-                        value = value.split(/\s/).reduce((acc, substring) => {
-                            return acc + _.upperFirst(substring) + ' ';
+                        value = value.split(/([\s-_.])/).reduce((acc, substring) => {
+                            return acc + _.upperFirst(substring);
                         }, '');
                         value = _.trim(value);
                     }
