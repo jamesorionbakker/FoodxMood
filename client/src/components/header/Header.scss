@@ -1,11 +1,11 @@
-$header-color: hsl(40, 53%, 76%);
+@import 'styles/colors.scss';
 
 .header-container {
-    color: hsl(10, 15%, 31%);
+    //color: hsl(10, 15%, 31%);
     position: fixed;
     top: 0px;
     z-index: 1;
-    background-color: $header-color;
+    background-color: $header-bg;
     // background-color: hsl(195, 53%, 79%);
     .header {
         height: 68px;
