@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './LoginForm.scss';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -16,7 +16,13 @@ export default function Login() {
 
     return (
         <div className="login-container">
-            <Form className="form">
+            <Form
+                className="form"
+                onSubmit={(e) => {
+                    e.preventDefault()
+                    console.log('signing in');
+                    dispatch(logIn());
+                }}>
                 <div className="login">
                     <Row className="form-row">
                         <Col md="auto">
@@ -48,10 +54,7 @@ export default function Login() {
                         <Col className="filler" xs={12}></Col>
                         <Col xs={8} md="auto">
                             <Button
-                                onClick={() => {
-                                    console.log('signing in');
-                                    dispatch(logIn());
-                                }}
+                                type="submit"
                                 className="login-button"
                                 variant="light">
                                 Sign In
