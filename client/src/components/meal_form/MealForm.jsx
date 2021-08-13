@@ -122,7 +122,6 @@ export default function MealForm(props) {
                             <InputAutoComplete
                                 submit={addIngredient}
                                 apiEndpoint="ingredients"
-                                allowNewItems
                                 clearOnSubmit
                                 placeholder="Add Ingredients One at a Time"
                             />
