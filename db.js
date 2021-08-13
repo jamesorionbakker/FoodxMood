@@ -114,10 +114,10 @@ export async function saveRefreshToken(data) {
     return response;
 }
 
-export async function validateRefreshToken(refreshToken) {
+// export async function validateRefreshToken(refreshToken) {
 
-    let exists = await RefreshToken.exists({ refreshToken });
-    if (!exists) throw new Error('refresh token does not exist');
-    return await RefreshToken.findOne({ refreshToken });
+//     let exists = await RefreshToken.exists({ refreshToken });
+//     if (!exists) throw new Error('refresh token does not exist');
+//     return await RefreshToken.findOne({ refreshToken });
 
-}
+// }
