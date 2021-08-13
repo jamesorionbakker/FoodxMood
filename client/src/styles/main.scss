@@ -1,0 +1,31 @@
+@import 'styles/_colors.scss';
+@import 'styles/_fonts.scss';
+@import "~bootstrap/scss/bootstrap";
+
+* {
+    box-sizing: border-box;
+    font-family: $font-condensed;
+    //font-family: 'Barlow', sans-serif;
+    color: $font-color;
+
+}
+input, button {
+    font-family: $font-regular;
+}
+body {
+    background-color: $body-bg;
+    margin: 0;
+}
+button.link {
+        margin: 0;
+        padding: 0;
+        background-color: Transparent;
+        background-repeat:no-repeat;
+        border: none;
+        cursor:pointer;
+        overflow: hidden;
+        outline:none;
+}
+button.link:hover {
+    opacity: 0.5;
+}
