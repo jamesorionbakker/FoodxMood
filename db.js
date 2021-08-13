@@ -10,10 +10,8 @@ import {
     refreshTokenSchema,
 } from './schemas.js';
 
-const connectionString = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@foodmooddb.gevve.mongodb.net/foodMoodDB?retryWrites=true&w=majority`;
-
 export function connect() {
-    return mongoose.connect(connectionString, {
+    return mongoose.connect(process.env.DB_CONNECTION_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });
@@ -94,4 +92,3 @@ export async function saveRefreshToken(data) {
     let response = await entry.save();
     return response;
 }
-
