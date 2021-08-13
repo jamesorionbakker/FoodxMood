@@ -1,8 +1,12 @@
+$header-color: hsl(40, 53%, 76%);
+
 .header-container {
+    color: hsl(10, 15%, 31%);
     position: fixed;
     top: 0px;
-    background-color: hsl(195, 53%, 79%);
     z-index: 1;
+    background-color: $header-color;
+    // background-color: hsl(195, 53%, 79%);
     .header {
         height: 68px;
         min-width: 320px;
@@ -18,5 +22,8 @@
     }
     .login {
         align-self: center;
+    }
+    span.x {
+        color:hsl(10, 70%, 50%)
     }
 }

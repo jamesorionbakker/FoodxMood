@@ -13,7 +13,7 @@ export default function DateBlock(props) {
             {index > 0 && <hr />}
             <Container fluid className="date-block-container">
                 <Row>
-                    <Col xs="auto">
+                    <Col xs={1} className="date-col">
                         <div className="date-container">
                             <div>{entries[0].date}</div>
                         </div>

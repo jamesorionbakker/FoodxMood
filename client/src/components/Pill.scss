@@ -1,47 +1,38 @@
 .pill {
-    $red: hsl(0, 40%, 60%);
-    $orange: hsl(36, 40%, 60%);
+    $red: #ff5c4d;
+    $orange: #ff9636;
     $yellow: hsl(73, 40%, 60%);
-    $green: hsl(113, 40%, 60%);
+    $green: #dad870;
 
     margin-right: 10px;
+    margin-bottom: 5px;
     font-size: 1em;
     display: inline-block;
-    background-color: hsl(0, 0, 92%);
-    border-radius: 5px;
+    // background-color: hsl(0, 0, 92%);
 
     .pill-primary {
         font-weight: 500;
         display: inline-block;
         padding: 0px 4px;
         margin: 0;
-    }
-    .pill-secondary {
-        font-size: 1em;
-        font-weight: 300;
         border-radius: 5px;
-        background-color: hsl(0, 0, 90%);
-        margin: 0;
-        display: inline-block;
-        padding: 0px 4px;
+        background-color: hsl(40, 53%, 86%);
     }
-    .red {
-        color: $red;
-    }
-    .orange {
-        color: $orange;
-    }
-    .green {
-        color: $green;
-    }
-    .yellow {
-        color: $yellow;
-    }
+    // .red {
+    //     background-color: $red;
+    // }
+    // .orange {
+    //     background-color: $orange;
+    // }
+    // .green {
+    //     background-color: $green;
+    // }
+    // .yellow {
+    //     background-color: $yellow;
+    // }
 }
 .pill:hover {
     $hover: hsl(88, 30%, 80%);
-    background-color: $hover;
-    .pill-secondary {
-        background-color: $hover;
-    }
+    opacity: 0.8;
+    cursor: pointer;
 }

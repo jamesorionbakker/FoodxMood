@@ -14,7 +14,7 @@ export default function AddButtonsContainer(props) {
                     dispatch(newMeal());
                 }}
                 className="new-meal"
-                variant="success">
+                variant="default">
                 <i className="fas fa-plus"></i> Add Meal
             </Button>
             <Button
@@ -22,7 +22,7 @@ export default function AddButtonsContainer(props) {
                     dispatch(newHealthCheck());
                 }}
                 className="new-meal"
-                variant="success">
+                variant="default">
                 <i className="fas fa-plus"></i> Add Wellness Check
             </Button>
         </div>

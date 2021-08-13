@@ -24,6 +24,7 @@ export default function Activity(props) {
                 <AddButtonsContainer />
                 <MealForm />
                 <HealthCheckForm />
+                <hr />
                 {activityFeed.map((dateBlock, index) => {
                     return <DateBlock key={index} index={index} entries={dateBlock} />;
                 })}

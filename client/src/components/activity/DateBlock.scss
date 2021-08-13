@@ -4,8 +4,12 @@
     
     .date-container {
         height: 100%;
-        width: 75px;
+        //width: 40px;
         display: flex;
         align-items: center;
+    }
+    div.date-col {
+        min-width: 70px;
+        max-width: 90px;
     }
 }
