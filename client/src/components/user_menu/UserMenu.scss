@@ -1,3 +1,5 @@
+@import 'styles/_colors.scss';
+
 div.user-menu {
     width: auto;
     .offcanvas-body {
@@ -15,5 +17,10 @@ div.user-menu {
     }
     button.logout {
         width: 100%
+    }
+}
+
+button.user-menu-button {
+    i {
     }
 }

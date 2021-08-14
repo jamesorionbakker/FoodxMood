@@ -1,4 +1,10 @@
+@import 'styles/_colors.scss';
+
 .login-container {
+    div.form-col {
+        padding-left: 7px;
+        padding-right: 7px;
+    }
     .password {
         max-width: 150px;
     }
@@ -10,7 +16,7 @@
         height: 8px;
     }
     @media (max-width: 767px) {
-        .signup-button {
+        button.signup-button {
             width: 100%;
         }
         .login-button {

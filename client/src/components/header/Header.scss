@@ -1,12 +1,16 @@
 @import 'styles/colors.scss';
 
-.header-container {
-    //color: hsl(10, 15%, 31%);
+div.header-container {
     position: fixed;
     top: 0px;
     z-index: 1;
     background-color: $header-bg;
-    // background-color: hsl(195, 53%, 79%);
+    box-shadow: $shadow-med;
+
+    h4, h3 {
+        text-shadow: $text-shadow;
+        color: $font-white;
+    }
     .header {
         height: 68px;
         min-width: 320px;
@@ -24,6 +28,6 @@
         align-self: center;
     }
     span.x {
-        color:hsl(10, 70%, 50%)
+        color: hsl(10, 70%, 50%);
     }
 }

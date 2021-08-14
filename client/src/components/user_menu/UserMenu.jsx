@@ -15,9 +15,9 @@ export default function UserMenu() {
         <div>
             <h4>
                 Hello, {useSelector((state) => state.UserState.firstName)}
-                <Button
-                    variant="outline-dark"
-                    style={{ marginLeft: '20px', color: 'inherit', borderColor: 'inherit' }}
+                <Button className="user-menu-button"
+                    variant="outline-light"
+                    style={{ marginLeft: '20px', color: 'white', borderColor: 'white' }}
                     onClick={() => dispatch(showUserOptions())}>
                     <i className="fas fa-bars"></i>
                 </Button>
@@ -46,7 +46,7 @@ export default function UserMenu() {
                         <Button
                             disabled={loggingOut}
                             variant="default"
-                            className="logout"
+                            className="logout button-dark-green"
                             onClick={ async () => {
                                 setLoggingOut(true)
                                 await dispatch(LogOut());

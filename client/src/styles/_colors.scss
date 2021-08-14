@@ -1,10 +1,39 @@
+
+// brown hue is 40 or 38, green hue is 125.  other good combo is 40 and 200
+$green-hue: 125;
+$brown-hue: 40;
+
 //BACKGROUND COLORS
 $body-bg:hsl(43, 33%, 96%);
-$header-bg: hsl(40, 53%, 76%);
-$sidebar-bg: hsl(40, 53%, 86%);
-$health-check-bg: hsl(40, 33%, 80%);
-$meal-bg: hsl(40, 33%, 90%);
-$entry-pill-bg: hsl(40, 53%, 86%);
+$modal-bg:hsl(43, 33%, 100%);
+$header-bg: hsl($green-hue, 19%, 70%);
+$sidebar-bg: hsl($green-hue, 19%, 80%);
+$health-check-bg: hsl($brown-hue, 33%, 80%);
+$meal-bg: hsl($brown-hue, 33%, 90%);
+$entry-pill-bg: hsl($brown-hue, 53%, 86%);
+
+
+//BUTTON COLORS
+$button-green-dark: hsl($green-hue, 19%, 40%);
+$button-green-dark-hover: hsl($green-hue, 19%, 30%);
+
+$button-green-light: hsl($green-hue, 19%, 80%);
+$button-green-light-hover: hsl($green-hue, 19%, 70%);
+
+$button-brown-light: hsl($brown-hue, 33%, 90%);
+$button-brown-light-hover: hsl($brown-hue, 33%, 80%);
 
 //FONT COLORS
-$font-color: hsl(10, 15%, 31%)
+$font-brown: hsl(10, 15%, 31%);
+//$font-black: hsl(0, 0%, 0%);
+$font-white: hsl(0, 0%, 100%);
+
+//SHADOWS
+
+$shadow-med: 0px 0px 5px hsla(0,0,0,0.3);
+$shadow-light: 0px 0px 5px rgba(192, 99, 99, 0.15);
+$text-shadow: 0px 0px 10px hsla(0,0,0,.15);
+
+//OLD COLORS
+// $sidebar-bg: hsl(40, 53%, 86%);
+// $header-bg: hsl(40, 53%, 76%);

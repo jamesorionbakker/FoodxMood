@@ -1,6 +1,7 @@
 @import 'styles/_colors.scss';
 
 .pill {
+    box-shadow: $shadow-light;
     margin-right: 10px;
     margin-bottom: 5px;
     font-size: 1em;

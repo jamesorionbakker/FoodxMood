@@ -1,31 +1,39 @@
+@import '~bootstrap/scss/bootstrap';
 @import 'styles/_colors.scss';
+@import 'styles/_buttons.scss';
 @import 'styles/_fonts.scss';
-@import "~bootstrap/scss/bootstrap";
 
 * {
     box-sizing: border-box;
     font-family: $font-condensed;
     //font-family: 'Barlow', sans-serif;
-    color: $font-color;
-
+    color: $font-brown;
 }
-input, button {
+input,button,form {
     font-family: $font-regular;
+}
+div.modal-content {
+    background-color: $modal-bg;
+}
+div.offcanvas {
+    background-color: $modal-bg;
+
 }
 body {
     background-color: $body-bg;
     margin: 0;
 }
 button.link {
-        margin: 0;
-        padding: 0;
-        background-color: Transparent;
-        background-repeat:no-repeat;
-        border: none;
-        cursor:pointer;
-        overflow: hidden;
-        outline:none;
+    margin: 0;
+    padding: 0;
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
 }
 button.link:hover {
     opacity: 0.5;
 }
+

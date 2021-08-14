@@ -1,3 +1,5 @@
+@import 'styles/_colors.scss';
+
 .ingredient-pill {
     position: relative;
     padding: 5px;
@@ -5,7 +7,8 @@
     margin-bottom: 10px;
     font-size: 1.1em;
     display: inline-block;
-    background-color: hsl(88, 30%, 80%);
+    //background-color: hsl(88, 30%, 80%);
+    background-color: $entry-pill-bg;
     border-radius: 5px;
 
     .pill-primary {
@@ -21,7 +24,6 @@
         font-size: 1em;
         font-weight: 300;
         border-radius: 5px;
-        background-color: hsla(0, 0, 90%, 50%);
         margin: 0;
         padding: 0px 4px;
     }
@@ -35,8 +37,6 @@
 }
 .ingredient-pill:hover {
     cursor: pointer;
-    $hover: hsl(88, 30%, 90%);
-    background-color: $hover;
     text-decoration: line-through;
     text-decoration-thickness: 2px;
     // .pill-secondary {

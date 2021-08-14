@@ -1,7 +1,8 @@
+@import 'styles/_colors.scss';
 div.sidebar-container {
     position: fixed;
-    background-color: hsl(40, 53%, 86%);
-    // background-color: hsl(195, 53%, 90%);
+    background-color: $sidebar-bg;
+    box-shadow: $shadow-med;
     left: 0px;
     top: 68px;
     bottom: 0px;
@@ -9,14 +10,14 @@ div.sidebar-container {
     width: 145px;
 
     h5 {
-        
         margin: 0px;
     }
     a,
     a:hover {
-    font-family: 'Barlow', sans-serif;
-
-        opacity: .7;
+        font-family: 'Barlow', sans-serif;
+        
+       opacity: 0.7;
+       color: $font-white;
         color: inherit;
         text-decoration: none;
     }

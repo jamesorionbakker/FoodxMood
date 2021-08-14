@@ -3,17 +3,13 @@ import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row'
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 
 import InputAutoComplete from 'components/common/InputAutoComplete';
-import {
-    closeMealForm,
-    deleteIngredient,
-    formChange,
-} from './state/MealFormActions';
+import { closeMealForm, deleteIngredient, formChange } from './state/MealFormActions';
 import Pill from 'components/IngredientPill';
 import * as API from 'components/common/utils/api';
 import { stringToUnixTime } from 'components/common/utils/DateHandler';
@@ -30,15 +26,12 @@ export default function MealForm(props) {
             setProcessing(true);
             let unixTime = stringToUnixTime(state.dateString, state.timeString);
             let newMeal = {
-                ingredients: state.ingredients.map(
-                    (ingredient) => ingredient.name
-                ),
+                ingredients: state.ingredients.map((ingredient) => ingredient.name),
                 type: state.mealType,
                 time: unixTime,
             };
             if (state.new) await API.post('activity/meals', newMeal);
-            if (state.edit)
-                await API.put('activity/meals/' + state._id, newMeal);
+            if (state.edit) await API.put('activity/meals/' + state._id, newMeal);
             setProcessing(false);
             handleClose();
             dispatch(setActivity());
@@ -54,7 +47,7 @@ export default function MealForm(props) {
 
     function addIngredient(newIngredient) {
         newIngredient = _.startCase(_.lowerCase(newIngredient));
-        if (state.ingredients.map(ingredient => ingredient.name).includes(newIngredient)) return;
+        if (state.ingredients.map((ingredient) => ingredient.name).includes(newIngredient)) return;
         dispatch(
             formChange({
                 ingredients: [...state.ingredients, { name: newIngredient }],
@@ -131,8 +124,8 @@ export default function MealForm(props) {
                         {state.ingredients.map((ingredient) => {
                             return (
                                 <Pill
-                                    onClick={()=>{
-                                        dispatch(deleteIngredient(ingredient))
+                                    onClick={() => {
+                                        dispatch(deleteIngredient(ingredient));
                                     }}
                                     key={ingredient.id}
                                     primaryText={ingredient.name}
@@ -143,21 +136,23 @@ export default function MealForm(props) {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button  variant="default" onClick={handleClose}>
                     Cancel
                 </Button>
                 {state.new && (
                     <Button
+                        className="button-light-green"
                         disabled={processing}
-                        variant="success"
+                        variant="default"
                         onClick={handleSubmit}>
                         {processing ? 'Posting' : 'Post Meal'}
                     </Button>
                 )}
                 {state.edit && (
                     <Button
+                        className="button-light-green"
                         disabled={processing}
-                        variant="success"
+                        variant="default"
                         onClick={handleSubmit}>
                         {processing ? 'Saving' : 'Save Changes'}
                     </Button>

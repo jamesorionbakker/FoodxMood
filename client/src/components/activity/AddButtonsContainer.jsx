@@ -13,7 +13,7 @@ export default function AddButtonsContainer(props) {
                 onClick={() => {
                     dispatch(newMeal());
                 }}
-                className="new-meal"
+                className="button-light-brown"
                 variant="default">
                 <i className="fas fa-plus"></i> Add Meal
             </Button>
@@ -21,7 +21,7 @@ export default function AddButtonsContainer(props) {
                 onClick={() => {
                     dispatch(newHealthCheck());
                 }}
-                className="new-meal"
+                className="button-light-brown"
                 variant="default">
                 <i className="fas fa-plus"></i> Add Wellness Check
             </Button>

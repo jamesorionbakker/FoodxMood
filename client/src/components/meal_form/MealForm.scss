@@ -1,3 +1,14 @@
+@import 'styles/_colors.scss';
+
+button.meal-form-submit-button {
+    border: none;
+    background-color: $button-green-light;
+}
+button.meal-form-submit-button:hover {
+    border: none;
+    background-color: $button-green-light-hover;
+}
+
 .meal-form-container {
     width: 100%;
 

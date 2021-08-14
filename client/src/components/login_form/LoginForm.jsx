@@ -25,7 +25,7 @@ export default function Login() {
                 }}>
                 <div className="login">
                     <Row className="form-row">
-                        <Col md="auto">
+                        <Col className="form-col" md="auto">
                             <Form.Control
                                 isInvalid={state.invalidUsername}
                                 name="username"
@@ -38,7 +38,7 @@ export default function Login() {
                             />
                         </Col>
                         <Col className="filler" xs={12}></Col>
-                        <Col md="auto">
+                        <Col className="form-col" md="auto">
                             <Form.Control
                                 isInvalid={state.invalidPassword}
                                 name="password"
@@ -52,7 +52,7 @@ export default function Login() {
                             />
                         </Col>
                         <Col className="filler" xs={12}></Col>
-                        <Col xs={8} md="auto">
+                        <Col className="form-col" xs={8} md="auto">
                             <Button
                                 type="submit"
                                 className="login-button"
@@ -60,10 +60,10 @@ export default function Login() {
                                 Sign In
                             </Button>
                         </Col>
-                        <Col xs={4} md="auto">
+                        <Col className="form-col" xs={4} md="auto">
                             <Button
                                 onClick={() => dispatch(showRegisterForm())}
-                                className="signup-button"
+                                className="button-dark-green"
                                 variant="success">
                                 Sign Up
                             </Button>

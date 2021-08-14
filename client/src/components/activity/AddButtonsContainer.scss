@@ -1,8 +1,16 @@
+@import 'styles/_colors.scss';
+
 .add-buttons-container {
     width: 100%;
     margin-bottom: 10px;
 
     button {
+        // background-color: $button-brown-light;
+        display: inline;
+        margin-right: 10px;
+    }
+    button:hover {
+        // background-color: $button-brown-light-hover;
         display: inline;
         margin-right: 10px;
     }

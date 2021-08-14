@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row'
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    closeHealthCheckForm,
-    formChange,
-    deleteSymptom
-} from './state/healthCheckFormActions';
+import { closeHealthCheckForm, formChange, deleteSymptom } from './state/healthCheckFormActions';
 import InputAutoComplete from 'components/common/InputAutoComplete';
 import Pill from 'components/IngredientPill';
 import * as API from 'components/common/utils/api';
@@ -37,12 +33,7 @@ export default function HealthCheckForm() {
     function addSymptom(newSymptom) {
         newSymptom = _.startCase(_.lowerCase(newSymptom));
         console.log(state.symptoms);
-        if (
-            state.symptoms
-                .map((symptom) => symptom.description)
-                .includes(newSymptom)
-        )
-            return;
+        if (state.symptoms.map((symptom) => symptom.description).includes(newSymptom)) return;
         dispatch(
             formChange({
                 symptoms: [...state.symptoms, { description: newSymptom }],
@@ -58,13 +49,8 @@ export default function HealthCheckForm() {
                 mood: state.mood,
                 time: unixTime,
             };
-            if (state.new)
-                await API.post('activity/health-checks', newHealthCheck);
-            if (state.edit)
-                await API.put(
-                    'activity/health-checks/' + state._id,
-                    newHealthCheck
-                );
+            if (state.new) await API.post('activity/health-checks', newHealthCheck);
+            if (state.edit) await API.put('activity/health-checks/' + state._id, newHealthCheck);
             setProcessing(false);
             handleClose();
             dispatch(setActivity());
@@ -79,9 +65,7 @@ export default function HealthCheckForm() {
         <Modal show={state.show} onHide={handleClose}>
             <Modal.Header closeButton>
                 {state.edit && <Modal.Title>Edit Wellness Check</Modal.Title>}
-                {state.new && (
-                    <Modal.Title>Post New Wellness Check</Modal.Title>
-                )}
+                {state.new && <Modal.Title>Post New Wellness Check</Modal.Title>}
             </Modal.Header>
             <Modal.Body>
                 <div className="health-check-form-container">
@@ -121,25 +105,19 @@ export default function HealthCheckForm() {
                                 <Button
                                     onClick={() => handleMoodSelect(1)}
                                     className="mood-button"
-                                    variant={
-                                        state.mood === 1 ? 'secondary' : 'light'
-                                    }>
+                                    variant={state.mood === 1 ? 'secondary' : 'light'}>
                                     Grumpy
                                 </Button>
                                 <Button
                                     onClick={() => handleMoodSelect(2)}
                                     className="mood-button"
-                                    variant={
-                                        state.mood === 2 ? 'secondary' : 'light'
-                                    }>
+                                    variant={state.mood === 2 ? 'secondary' : 'light'}>
                                     Neutral
                                 </Button>
                                 <Button
                                     onClick={() => handleMoodSelect(3)}
                                     className="mood-button"
-                                    variant={
-                                        state.mood === 3 ? 'secondary' : 'light'
-                                    }>
+                                    variant={state.mood === 3 ? 'secondary' : 'light'}>
                                     Upbeat
                                 </Button>
                             </ButtonGroup>
@@ -172,21 +150,23 @@ export default function HealthCheckForm() {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="default" onClick={handleClose}>
                     Cancel
                 </Button>
                 {state.new && (
                     <Button
+                        className="button-light-green"
                         disabled={processing}
-                        variant="success"
+                        variant="default"
                         onClick={handleSubmit}>
                         {processing ? 'Posting' : 'Post Health Check'}
                     </Button>
                 )}
                 {state.edit && (
                     <Button
+                        className="button-light-green"
                         disabled={processing}
-                        variant="success"
+                        variant="default"
                         onClick={handleSubmit}>
                         {processing ? 'Saving' : 'Save Changes'}
                     </Button>

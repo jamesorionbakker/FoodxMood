@@ -173,14 +173,16 @@ export default function RegisterForm() {
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => dispatch(hideRegisterForm())}>
+                    <Button variant="default" onClick={() => dispatch(hideRegisterForm())}>
                         Cancel
                     </Button>
                     <Button
                         onClick={handleSubmit}
                         type="submit"
                         disabled={processing}
-                        variant="success">
+                        variant="default" 
+                        className="button-light-green"
+                        >
                         {processing ? 'Creating Account' : 'Create Account'}
                     </Button>
                 </Modal.Footer>
