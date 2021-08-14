@@ -1,0 +1,37 @@
+//LIGHT GREEN
+button.button-light-green {
+    background-color: $button-green-light;
+}
+button.button-light-green:hover {
+    background-color: $button-green-light-hover;
+}
+button.button-light-green:focus {
+    background-color: $button-green-light-hover;
+}
+
+//LIGHT BROWN
+button.button-light-brown {
+    color: $font-brown;
+    background-color: $button-brown-light;
+}
+button.button-light-brown:hover {
+    background-color: $button-brown-light-hover;
+}
+button.button-light-brown:focus {
+    background-color: $button-brown-light-hover;
+}
+//DARK GREEN
+
+button.button-dark-green {
+    color: $font-white;
+    border: none;
+    background-color: $button-green-dark ;
+}
+button.button-dark-green:hover {
+    color: $font-white;
+    background-color: $button-green-dark-hover ;
+}
+button.button-dark-green:focus {
+    color: $font-white;
+    background-color: $button-green-dark-hover ;
+}
