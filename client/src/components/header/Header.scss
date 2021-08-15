@@ -1,4 +1,6 @@
-@import 'styles/colors.scss';
+@import 'styles/_colors.scss';
+@import 'styles/layout.scss';
+
 
 div.header-container {
     position: fixed;
@@ -12,7 +14,7 @@ div.header-container {
         color: $font-white;
     }
     .header {
-        height: 68px;
+        height: $header-height;
         min-width: 320px;
         padding: 15px 0px;
     }

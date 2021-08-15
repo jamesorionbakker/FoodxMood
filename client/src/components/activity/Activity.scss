@@ -1,6 +1,10 @@
+@import 'styles/_layout.scss';
+
 .activity-container {
-    margin-left: 145px;
-    margin-top: 68px;
+    position: relative;
+    margin-left: $sidebar-width;
+    margin-top: $header-height;
     padding: 10px;
-    width: calc(100vw - 145px);
+    width: calc(100vw - #{$sidebar-width});
+    min-height: calc(100vh - #{$header-height});
 }

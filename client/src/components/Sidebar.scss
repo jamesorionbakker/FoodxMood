@@ -1,13 +1,15 @@
 @import 'styles/_colors.scss';
+@import 'styles/layout.scss';
+
 div.sidebar-container {
     position: fixed;
     background-color: $sidebar-bg;
     box-shadow: $shadow-med;
     left: 0px;
-    top: 68px;
+    top: $header-height;
     bottom: 0px;
     padding: 10px 0px;
-    width: 145px;
+    width: $sidebar-width;
 
     h5 {
         margin: 0px;
