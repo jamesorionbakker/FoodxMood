@@ -36,4 +36,9 @@ button.link {
 button.link:hover {
     opacity: 0.5;
 }
-
+div.loading-spinner {
+    opacity: .5;
+    position: absolute;
+    left: calc(50% - 1rem);
+    top: 50%;
+}
