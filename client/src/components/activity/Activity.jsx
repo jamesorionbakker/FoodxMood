@@ -7,28 +7,28 @@ import * as FeedArray from './utils/feedArray';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActivity } from 'components/activity/state/ActivityActions';
 import HealthCheckForm from 'components/health_check_form/HealthCheckForm';
+import  Spinner from 'react-bootstrap/Spinner';
 
 export default function Activity(props) {
     const dispatch = useDispatch();
     let state = useSelector((state) => state);
-
-    useEffect(() => {
+    let loaded = !state.activity.loading
+    
+    useEffect( () => {
         dispatch(setActivity());
     }, [state.view]);
-
-    let activityFeed = FeedArray.create(state.activity.data);
     
     return (
         <div className="activity-container">
-            <div>
+            {loaded ? <div>
                 <AddButtonsContainer />
                 <MealForm />
                 <HealthCheckForm />
                 <hr />
-                {activityFeed.map((dateBlock, index) => {
+                {FeedArray.build(state.activity.data).map((dateBlock, index) => {
                     return <DateBlock key={index} index={index} entries={dateBlock} />;
                 })}
-            </div>
+            </div> : <Spinner animation='border' className="loading-spinner"/>}
         </div>
     );
 }

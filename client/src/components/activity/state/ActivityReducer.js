@@ -1,4 +1,4 @@
-const initialState = { data: {}, loading: false };
+const initialState = { data: {}, loading: true };
 
 export default function ActivityReducer(state = initialState, action) {
     switch (action.type) {
