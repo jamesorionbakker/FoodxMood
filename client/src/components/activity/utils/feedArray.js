@@ -18,14 +18,14 @@ function unixTimeToDate(time) {
     return date.format('MMM DD');
 }
 
-function objToArray(dataObject) {
+function copyObjToArray(dataObject) {
     return Object.entries(dataObject).map(([key, val]) => {
         return { ...val }; //spread operator prevents state mutation by creating shallow copy
     });
 }
 
 export const build = (activityEntriesObj) => {
-    let activityEntriesArrSorted = objToArray(activityEntriesObj).sort((a, b) => b.time - a.time);
+    let activityEntriesArrSorted = copyObjToArray(activityEntriesObj).sort((a, b) => b.time - a.time);
     return activityEntriesArrSorted.reduce((output, currEntry, index, currArray) => {
         currEntry.date = unixTimeToDate(currEntry.time);
         if (index === 0) {
