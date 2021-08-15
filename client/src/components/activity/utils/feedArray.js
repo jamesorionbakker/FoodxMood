@@ -20,28 +20,29 @@ function unixTimeToDate(time) {
 
 function objToArray(dataObject) {
     return Object.entries(dataObject).map(([key, val]) => {
-        return { ...val }; //IMPORTANT, CREATES SHALLOW COPY TO PREVENT MUTATING STATE
+        return { ...val }; //spread operator prevents state mutation by creating shallow copy
     });
 }
 
 export const build = (activityEntriesObj) => {
-    console.log('building feed array')
     let activityEntriesArrSorted = objToArray(activityEntriesObj).sort((a, b) => b.time - a.time);
-    return activityEntriesArrSorted.reduce((accumulator, currEntry, index, currArray) => {
+    return activityEntriesArrSorted.reduce((output, currEntry, index, currArray) => {
         currEntry.date = unixTimeToDate(currEntry.time);
         if (index === 0) {
-            accumulator.push([currEntry]);
-            return accumulator;
+            output.push([currEntry]);
+            return output;
         }
         let lastEntry = currArray[index - 1];
         if (lastEntry.date === currEntry.date) {
-            accumulator[accumulator.length - 1].unshift(currEntry);
-            return accumulator;
+            output[output.length - 1].unshift(currEntry);
+            return output;
         }
-        accumulator.push([currEntry]);
-        return accumulator;
+        output.push([currEntry]);
+        return output;
     }, []);
 };
+
+//OLD HARD TO READ CODE
 
 // export function create(dataObject) {
 //     console.log(dataObject)
