@@ -27,18 +27,18 @@ function toSortedArray(dataObject){
     })
 }
 
-export function create(dataObject) { 
-    let dataArray = toSortedArray(dataObject)
-    return dataArray.reduce((acc, currentEntry) => {
-        currentEntry.date = toDate(currentEntry.time);
-        let lastSubArray = acc[acc.length - 1];
-        if (!lastSubArray) return [[currentEntry]];
-        let lastEntry = lastSubArray[lastSubArray.length - 1];
-        if (lastEntry.date === currentEntry.date) {
-            acc[acc.length - 1].unshift(currentEntry);
-            return acc;
-        }
-        acc.push([currentEntry]);
-        return acc;
-    }, []);
-}
+// export function create(dataObject) { 
+//     let dataArray = toSortedArray(dataObject)
+//     return dataArray.reduce((acc, currentEntry) => {
+//         currentEntry.date = toDate(currentEntry.time);
+//         let lastSubArray = acc[acc.length - 1];
+//         if (!lastSubArray) return [[currentEntry]];
+//         let lastEntry = lastSubArray[lastSubArray.length - 1];
+//         if (lastEntry.date === currentEntry.date) {
+//             acc[acc.length - 1].unshift(currentEntry);
+//             return acc;
+//         }
+//         acc.push([currentEntry]);
+//         return acc;
+//     }, []);
+// }
