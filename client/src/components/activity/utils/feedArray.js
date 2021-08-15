@@ -7,27 +7,44 @@ dayjs.extend(isYesterday);
 dayjs.extend(isToday);
 dayjs.extend(customParseFormat);
 
-function toDate(time) {
+function unixTimeToDate(time) {
     let date = dayjs.unix(time);
     if (date.isYesterday()) return 'Yesterday';
-    if (date.isToday()) return 'Today'
-    let oneWeekAgo = dayjs().subtract(1, 'week')
-    if (date.isAfter(oneWeekAgo)){
-        return date.format('dddd')
+    if (date.isToday()) return 'Today';
+    let oneWeekAgo = dayjs().subtract(1, 'week');
+    if (date.isAfter(oneWeekAgo)) {
+        return date.format('dddd');
     }
     return date.format('MMM DD');
 }
 
-function toSortedArray(dataObject){
-    let dataArray = Object.entries(dataObject).map(([key, val])=>{
-        return {...val} //IMPORTANT, CREATES SHALLOW COPY TO PREVENT MUTATING STATE
-    })
-    return dataArray.sort((a, b)=>{
-        return b.time - a.time
-    })
+function objToArray(dataObject) {
+    return Object.entries(dataObject).map(([key, val]) => {
+        return { ...val }; //IMPORTANT, CREATES SHALLOW COPY TO PREVENT MUTATING STATE
+    });
 }
 
-// export function create(dataObject) { 
+export const build = (activityEntriesObj) => {
+    console.log('building feed array')
+    let activityEntriesArrSorted = objToArray(activityEntriesObj).sort((a, b) => b.time - a.time);
+    return activityEntriesArrSorted.reduce((accumulator, currEntry, index, currArray) => {
+        currEntry.date = unixTimeToDate(currEntry.time);
+        if (index === 0) {
+            accumulator.push([currEntry]);
+            return accumulator;
+        }
+        let lastEntry = currArray[index - 1];
+        if (lastEntry.date === currEntry.date) {
+            accumulator[accumulator.length - 1].unshift(currEntry);
+            return accumulator;
+        }
+        accumulator.push([currEntry]);
+        return accumulator;
+    }, []);
+};
+
+// export function create(dataObject) {
+//     console.log(dataObject)
 //     let dataArray = toSortedArray(dataObject)
 //     return dataArray.reduce((acc, currentEntry) => {
 //         currentEntry.date = toDate(currentEntry.time);
