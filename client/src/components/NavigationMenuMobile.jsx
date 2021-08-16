@@ -16,39 +16,39 @@ export default function Sidebar(props) {
                 <Row>
                     <Col xs={4}>
                         <div className="nav-item">
-                            <i className="fas fa-list-ul"></i><br/>
                             <a
                                 href="#"
                                 onClick={() => {
                                     dispatch(ViewActivity('all'));
                                 }}>
+                                <i className="fas fa-list-ul"></i>
+                                <br />
                                 Activity
                             </a>
                         </div>
                     </Col>
                     <Col xs={4}>
                         <div className="nav-item">
-                            <i className="fas fa-chart-area"></i>
-                            <br />
-
                             <a
                                 href="#"
                                 onClick={() => {
                                     dispatch(ViewActivity('all'));
                                 }}>
+                                <i className="fas fa-chart-area"></i>
+                                <br />
                                 Analysis
                             </a>
                         </div>
                     </Col>
                     <Col xs={4}>
                         <div className="nav-item">
-                            <i className="fas fa-cog"></i>
-                            <br />
                             <a
                                 href="#"
                                 onClick={() => {
-                                    dispatch(showUserOptions())
+                                    dispatch(showUserOptions());
                                 }}>
+                            <i className="fas fa-cog"></i>
+                            <br />
                                 Settings
                             </a>
                         </div>

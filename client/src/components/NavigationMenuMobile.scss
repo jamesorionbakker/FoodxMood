@@ -11,25 +11,12 @@ div.navigation-menu-mobile-container {
     padding: 10px 0px;
     z-index: 1;
 
-    h5 {
-        margin: 0px;
-    }
     div.nav-item {
         text-align: center;
     }
-    a,
-    a:hover {
+    a {
         font-family: 'Barlow', sans-serif;
-        
-       opacity: 0.7;
-       color: colors.$font-white;
-        color: inherit;
+        color: colors.$font-brown;
         text-decoration: none;
     }
-    a:hover {
-        opacity: 1;
-    }
-    // .nav-item:hover {
-    //     background-color: hsl(195, 53%, 85%);
-    // }
 }
