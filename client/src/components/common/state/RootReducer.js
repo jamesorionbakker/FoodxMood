@@ -7,6 +7,7 @@ import LoginFormReducer from 'components/login_form/state/loginFormReducer'
 import UserMenuReducer from 'components/user_menu/state/UserMenuReducer'
 import ViewReducer from './ViewReducer'
 import RegisterFormReducer from 'components/register_form/state/registerFormReducer'
+import ViewportReducer from './ViewportReducer'
 
 const rootReducer = combineReducers({
     UserState: UserStateReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     loginForm: LoginFormReducer,
     userMenu: UserMenuReducer,
     view: ViewReducer,
-    registerForm: RegisterFormReducer
+    registerForm: RegisterFormReducer,
+    viewport: ViewportReducer,
 })
 
 export default rootReducer
