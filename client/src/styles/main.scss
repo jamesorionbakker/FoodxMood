@@ -6,10 +6,12 @@
 * {
     box-sizing: border-box;
     font-family: $font-condensed;
-    //font-family: 'Barlow', sans-serif;
     color: $font-brown;
 }
-input,button,form {
+input,
+button,
+form,
+a.dropdown-item {
     font-family: $font-regular;
 }
 div.modal-content {
@@ -17,7 +19,6 @@ div.modal-content {
 }
 div.offcanvas {
     background-color: $modal-bg;
-
 }
 body {
     background-color: $body-bg;
@@ -37,7 +38,7 @@ button.link:hover {
     opacity: 0.5;
 }
 div.loading-spinner {
-    opacity: .5;
+    opacity: 0.5;
     position: absolute;
     left: calc(50% - 1rem);
     top: 50%;
