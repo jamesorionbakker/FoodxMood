@@ -10,10 +10,11 @@ import { useState } from 'react';
 export default function UserMenu() {
     let state = useSelector((state) => state.userMenu);
     let [loggingOut, setLoggingOut] = useState(false);
+    let mobile = useSelector(state => state.viewport.mobile)
     const dispatch = useDispatch();
     return (
         <div>
-            <h4>
+            {/* <h4>
                 Hello, {useSelector((state) => state.UserState.firstName)}
                 <Button className="user-menu-button"
                     variant="outline-light"
@@ -21,12 +22,12 @@ export default function UserMenu() {
                     onClick={() => dispatch(showUserOptions())}>
                     <i className="fas fa-bars"></i>
                 </Button>
-            </h4>
+            </h4> */}
             <Offcanvas
                 className="user-menu"
                 show={state.show}
                 onHide={() => dispatch(hideUserOptions())}
-                placement="end">
+                placement={mobile ? 'bottom' : 'end'}>
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>Your Account</Offcanvas.Title>
                 </Offcanvas.Header>

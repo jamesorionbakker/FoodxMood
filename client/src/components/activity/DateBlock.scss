@@ -1,4 +1,8 @@
+@use 'styles/_colors.scss';
+@use 'styles/_layout.scss';
+
 .date-block-container {
+    position: relative;
     border-radius: 10px;
     margin-bottom: 10px;
     
@@ -7,9 +11,20 @@
         //width: 40px;
         display: flex;
         align-items: center;
+        @media screen and (max-width: 767px) {
+            position: sticky;
+            top: 80px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: colors.$body-bg;
+        }
     }
     div.date-col {
-        min-width: 70px;
-        max-width: 90px;
+        min-width: 85px;
+        margin-right: 10px;
+    }
+    div.entries-col {
+        padding: 0px;
     }
 }

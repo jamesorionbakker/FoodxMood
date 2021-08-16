@@ -26,10 +26,10 @@ export default function MealEntry(props) {
     return (
         <Container className="entry-container" fluid>
             <Row>
-                <Col xs="auto" className="time-container">
+                <Col xs={12} md="auto" className="time-container">
                     {dayjs.unix(time).format('h:mm A')}
                 </Col>
-                <Col xs={true} className="entry-data-container meal-entry-container">
+                <Col xs={12} md={true} className="entry-data-container meal-entry-container">
                     <Row>
                         <Col>
                             <Row className="entry-heading">
@@ -53,7 +53,7 @@ export default function MealEntry(props) {
                                 </Col>
                             </Row>
                         </Col>
-                        <Col className="manage-entry-col" xs="auto">
+                        <Col xs={12} md="auto" className="manage-entry-col">
                             <ManageEntry entry={entry} />
                         </Col>
                     </Row>

@@ -1,12 +1,15 @@
 import React from 'react';
-import './Sidebar.scss';
-import { useDispatch } from 'react-redux';
+import './NavigationMenu.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import { ViewActivity } from './common/state/ViewActions';
 
+
 export default function Sidebar(props) {
+    
     let dispatch = useDispatch();
+    let viewportWidth = useSelector(state => state.view.viewportWidth)
     return (
-        <div className="sidebar-container">
+        <div className='navigation-menu-container'>
             <div className="nav-group">
                 <div className="nav-group-title">
                     <h5>Your Log</h5>

@@ -1,42 +1,50 @@
 @import 'styles/_colors.scss';
 div.entry-container {
+    // padding-left: 0px;
     margin: 10px 0px;
 }
 div.time-container {
+    padding-left: 0px;
     min-width: 75px;
-    max-width: 75px;
+    // max-width: 75px;
     opacity: 0.8;
     display: flex;
     align-items: center;
 }
 div.entry-data-container {
+    padding: 8px 20px;
+    margin-left: 10px;
+    margin-top: 0px;
     position: relative;
     border-radius: 10px;
+}
+.entry-section {
+    padding: 5px 0;
+    align-content: center;
+}
+.entry-heading {
+    padding: 3px 0px;
+    border-radius: 10px 10px 0px 0px;
+
+    span {
+        margin-right: 10px;
+    }
+}
+
+.entry-type-secondary {
+    font-weight: 200;
+}
+.entry-time {
+    font-weight: 200;
+}
+.manage-entry-col {
+    display: flex;
+    align-items: flex-end;
+}
+
+i.manage-icon {
     margin-left: 10px;
-    padding: 8px 20px;
-    .entry-section {
-        padding: 5px 0;
-        align-content: center;
-    }
-    .entry-heading {
-        padding: 3px 0px;
-        border-radius: 10px 10px 0px 0px;
-
-        span {
-            margin-right: 10px;
-        }
-    }
-
-    .entry-type-secondary {
-        font-weight: 200;
-    }
-    .entry-time {
-        font-weight: 200;
-    }
-    .manage-entry-col {
-        display: flex;
-        align-items: center;
-    }
+    margin-right: 0px;
 }
 .entry-data-container::after {
     position: absolute;
@@ -51,7 +59,6 @@ div.entry-data-container {
 }
 
 .health-check-entry-container {
-    //box-shadow: 0px 0px 10px $health-check-bg;
     background-color: $health-check-bg;
     .entry-heading {
         background-color: $health-check-bg;
@@ -62,8 +69,6 @@ div.entry-data-container {
 }
 
 .meal-entry-container {
-    //box-shadow: 0px 0px 10px $meal-bg;
-
     background-color: $meal-bg;
     .entry-heading {
         background-color: $meal-bg;
@@ -71,4 +76,21 @@ div.entry-data-container {
 }
 .meal-entry-container::after {
     border-right-color: $meal-bg;
+}
+
+@media screen and (max-width: 768px) {
+    div.time-container {
+        margin-left: 10px;
+    }
+    div.entry-data-container {
+        margin-top: 10px;
+        margin-left: 0px;
+    }
+    div.entry-data-container::after {
+        display: none;
+    }
+    i.manage-icon {
+        margin-left: 0px;
+        margin-right: 10px;
+    }
 }

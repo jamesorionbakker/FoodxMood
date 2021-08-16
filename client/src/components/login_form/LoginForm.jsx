@@ -9,7 +9,7 @@ import { setLoginForm, logIn } from './state/loginFormActions';
 import { showRegisterForm } from 'components/register_form/state/registerFormActions';
 import RegisterForm from 'components/register_form/registerForm';
 
-export default function Login() {
+export default function LoginForm() {
     let state = useSelector((state) => state.loginForm);
     let { attemptingLogin } = useSelector((state) => state.UserState);
 

@@ -1,7 +1,6 @@
 @import 'styles/_colors.scss';
 @import 'styles/layout.scss';
 
-
 div.header-container {
     position: fixed;
     top: 0px;
@@ -9,9 +8,16 @@ div.header-container {
     background-color: $header-bg;
     box-shadow: $shadow-med;
 
-    h4, h3 {
+    h2 {
+        vertical-align: middle;
+        font-size: 30px;
+        margin-bottom: 0;
         text-shadow: $text-shadow;
         color: $font-white;
+    }
+
+    @media screen and (max-width: 767px) {
+        text-align: center;
     }
     .header {
         height: $header-height;
@@ -21,7 +27,6 @@ div.header-container {
     .logo {
         font-size: 1.5em;
         min-width: 200px;
-        align-self: center;
     }
     .filler {
         min-height: 10px;

@@ -1,10 +1,18 @@
-@import 'styles/_layout.scss';
+@use 'styles/_layout.scss';
 
 .activity-container {
     position: relative;
-    margin-left: $sidebar-width;
-    margin-top: $header-height;
+    margin-left: layout.$sidebar-width;
     padding: 10px;
-    width: calc(100vw - #{$sidebar-width});
-    min-height: calc(100vh - #{$header-height});
+    width: calc(100vw - #{layout.$sidebar-width});
+    min-height: calc(100vh - #{layout.$header-height});
+}
+
+@media screen and (max-width: 767px){
+    .activity-container {
+        margin-left: 0px;
+        width: 100%;
+        margin-bottom: layout.$nav-height-mobile;
+    }
+    
 }

@@ -25,19 +25,15 @@ export default function ManageEntry(props) {
     function handleEdit(e) {
         e.preventDefault();
         if (type === 'meal') dispatch(editMeal(_id));
-        if (type === 'healthCheck') dispatch(editHealthCheck(_id))
+        if (type === 'healthCheck') dispatch(editHealthCheck(_id));
     }
 
     return (
         <div>
-            <a onClick={handleDelete} href="#">
-                <i style={{ marginLeft: '10px' }} className="fas fa-times"></i>
-            </a>
+            <a onClick={handleDelete} href="#"><i  className="fas fa-times manage-icon"></i></a>
             <a onClick={handleEdit} href="#">
-                <i
-                    style={{ marginLeft: '10px' }}
-                    className="fas fa-pencil-alt"></i>
+                <i  className="fas fa-pencil-alt manage-icon"></i>
             </a>
         </div>
     );
-};
+}

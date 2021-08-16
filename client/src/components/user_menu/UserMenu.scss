@@ -2,6 +2,12 @@
 
 div.user-menu {
     width: auto;
+    @media screen and (max-width: 767px) {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
     .offcanvas-body {
         position: relative;
     }

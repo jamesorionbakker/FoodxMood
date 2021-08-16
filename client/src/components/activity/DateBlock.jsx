@@ -13,12 +13,12 @@ export default function DateBlock(props) {
             {index > 0 && <hr />}
             <Container fluid className="date-block-container">
                 <Row>
-                    <Col xs={1} className="date-col">
+                    <Col xs={12} md='auto' className="date-col">
                         <div className="date-container">
-                            <div>{entries[0].date}</div>
+                            {entries[0].date}
                         </div>
                     </Col>
-                    <Col>
+                    <Col xs={12} md={true}  className="entries-col">
                         {entries.map((entry) => {
                             if (entry.type === 'meal')
                                 return <MealEntry key={entry._id} entry={entry} />;
