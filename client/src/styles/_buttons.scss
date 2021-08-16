@@ -23,8 +23,8 @@ button.button-light-brown:focus {
 //DARK GREEN
 
 button.button-dark-green {
+    border-color: $button-green-dark;
     color: $font-white;
-    border: none;
     background-color: $button-green-dark ;
 }
 button.button-dark-green:hover {
