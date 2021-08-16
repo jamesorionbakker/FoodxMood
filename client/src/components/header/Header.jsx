@@ -37,7 +37,6 @@ export default function Header() {
                 <Col xs={12} md={true} className="logo">
                     <h2>
                         Food <span className="x">x</span> Mood{' '}
-                        {useSelector((state) => state.viewport.width)}
                     </h2>
                 </Col>
                 <Col xs={0} md={true} className="filler"></Col>
