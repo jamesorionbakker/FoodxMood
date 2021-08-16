@@ -1,4 +1,3 @@
-import { Password } from 'components/common/utils/formValidation';
 const intitalInputState = { value: '', valid: false, touched: false, error: 'Required Field' };
 const initialState = {
     show: false,
@@ -23,7 +22,7 @@ export default function RegisterFormReducer(state = initialState, action) {
             return { ...state, ...payload };
         case 'REGISTER_FORM/TOUCH_ALL':
             let outputState = {...state}
-            let response = Object.keys(state).forEach((key)=>{
+            Object.keys(state).forEach((key)=>{
                 if(outputState[key].hasOwnProperty('touched')){
                     outputState[key].touched = true;
                 }

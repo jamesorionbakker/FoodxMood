@@ -3,7 +3,6 @@ const initialState = {
 };
 
 export default function UserOptionsReducer(state = initialState, action) {
-    let payload = action.payload;
     switch (action.type) {
         case 'USER_MENU/SHOW':
             console.log('showing')

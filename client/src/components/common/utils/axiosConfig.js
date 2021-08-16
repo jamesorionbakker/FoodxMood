@@ -1,12 +1,11 @@
 import store from 'components/common/state/Store.js';
 import axios from 'axios';
 import { attemptLogIn } from 'components/common/state/UserStateActions';
+let dispatch = store.dispatch;
 
 function getToken() {
     return store.getState().UserState.accessToken;
 }
-
-let dispatch = store.dispatch;
 
 export const configAxios = async () => {
     axios.interceptors.request.use(

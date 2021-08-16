@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 
 export default function HealthCheckEntry(props) {
     let { entry } = props;
-    let { symptoms, type, time } = entry;
+    let { symptoms, time } = entry;
     return (
         <Container className="entry-container" fluid>
             <Row>
