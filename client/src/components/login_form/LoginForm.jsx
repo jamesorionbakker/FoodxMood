@@ -39,7 +39,6 @@ export default function LoginForm() {
                                     }}
                                 />
                             </Col>
-                            <Col className="filler" xs={12}></Col>
                             <Col className="form-col" md="auto">
                                 <Form.Control
                                     isInvalid={state.invalidPassword}
@@ -53,16 +52,15 @@ export default function LoginForm() {
                                     placeholder="Password"
                                 />
                             </Col>
-                            <Col className="filler" xs={12}></Col>
-                            <Col className="form-col" xs={8} md="auto">
+                            <Col className="form-col" xs={6} md="auto">
                                 <Button type="submit" className="login-button" variant="light">
                                     Sign In
                                 </Button>
                             </Col>
-                            <Col className="form-col" xs={4} md="auto">
+                            <Col className="form-col" xs={6} md="auto">
                                 <Button
                                     onClick={() => dispatch(showRegisterForm())}
-                                    className="button-dark-green"
+                                    className="button-dark-green signup-button"
                                     variant="success">
                                     Sign Up
                                 </Button>

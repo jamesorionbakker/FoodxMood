@@ -1,35 +1,20 @@
 @import 'styles/_colors.scss';
 
 .login-container {
+    input {
+        width: 150px;
+    }
     div.form-col {
-        padding-left: 7px;
-        padding-right: 7px;
-    }
-    .password {
-        max-width: 150px;
-    }
-    .username {
-        max-width: 150px;
-    }
-    .filler {
-        display: none;
-        height: 8px;
+        padding: 0px 7px 10px 7px;
     }
     @media (max-width: 767px) {
-        button.signup-button {
+        input, button {
+            height: 45px;
             width: 100%;
+            font-size: 1.1em;
         }
-        .login-button {
-            width: 100%;
-        }
-        .filler {
-            display: block;
-        }
-        .password {
-            max-width: 100%;
-        }
-        .username {
-            max-width: 100%;
+        div.form-col {
+            margin-top: 10px;
         }
     }
 }
