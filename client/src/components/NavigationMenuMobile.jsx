@@ -9,19 +9,19 @@ import { showUserOptions } from './user_menu/state/UserMenuActions';
 
 export default function Sidebar(props) {
     let dispatch = useDispatch();
-    let currentView = useSelector(state => state.view.currentView)
+    let currentView = useSelector((state) => state.view.currentView);
 
     return (
         <div className="navigation-menu-mobile-container">
             <Container fluid>
                 <Row>
                     <Col className="col" xs={4}>
-                        <div className={`nav-item ${currentView === 'activity' ? 'active' : ''}`}>
-                            <a
-                                href="#"
-                                onClick={() => {
-                                    dispatch(setViewToActivity('all'));
-                                }}>
+                        <div
+                            className={`nav-item ${currentView === 'activity' && 'active'}`}
+                            onClick={() => {
+                                dispatch(setViewToActivity('all'));
+                            }}>
+                            <a href="#">
                                 <i className="fas fa-list-ul"></i>
                                 <br />
                                 Activity
@@ -29,12 +29,12 @@ export default function Sidebar(props) {
                         </div>
                     </Col>
                     <Col className="col" xs={4}>
-                        <div className="nav-item">
-                            <a
-                                href="#"
-                                onClick={() => {
-                                    dispatch(setViewToAnalysis());
-                                }}>
+                        <div
+                            className={`nav-item ${currentView === 'analysis' && 'active'}`}
+                            onClick={() => {
+                                dispatch(setViewToAnalysis());
+                            }}>
+                            <a href="#">
                                 <i className="fas fa-chart-area"></i>
                                 <br />
                                 Analysis
@@ -42,14 +42,14 @@ export default function Sidebar(props) {
                         </div>
                     </Col>
                     <Col className="col" xs={4}>
-                        <div className="nav-item">
-                            <a
-                                href="#"
-                                onClick={() => {
-                                    dispatch(showUserOptions());
-                                }}>
-                            <i className="fas fa-cog"></i>
-                            <br />
+                        <div
+                            className="nav-item"
+                            onClick={() => {
+                                dispatch(showUserOptions());
+                            }}>
+                            <a href="#">
+                                <i className="fas fa-cog"></i>
+                                <br />
                                 Settings
                             </a>
                         </div>
