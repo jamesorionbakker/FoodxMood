@@ -1,56 +1,36 @@
-import { attemptLogIn } from '../state/UserStateActions.js';
-import store from '../state/Store.js';
+import axios from 'axios';
 
-let dispatch = store.dispatch;
-
-function token() {
-    return store.getState().UserState.accessToken;
-}
-
-export function getHeaders() {
-    return {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token().value}`,
-    };
-}
-
-
-export async function get(route) {
-    if (token().expired()) await dispatch(attemptLogIn());
+export const get = async (route) => {
     console.log('api get: ' + route);
-    let response = await fetch(`/api/${route}`, {
-        method: 'GET',
-        headers: getHeaders(),
+    let response = await axios({
+        method: 'get',
+        url: `/api/${route}`
     });
-    return await response.json();
-}
+    return response.data;
+};
 
-export async function post(route, data) {
-    if (token().expired()) await dispatch(attemptLogIn());
-    console.log('api post: ' + route);
-    let response = await fetch(`/api/${route}`, {
-        method: 'POST',
-        headers: getHeaders(),
-        body: JSON.stringify(data),
+export const post = async (route, data) => {
+    let response = await axios({
+        method: 'post',
+        url: `/api/${route}`,
+        data,
     });
-    return await response.json();
-}
+    return response.data;
+};
 
-export async function put(route, data) {
-    if (token().expired()) await dispatch(attemptLogIn());
-    let response = await fetch(`/api/${route}`, {
-        method: 'PUT',
-        headers: getHeaders(),
-        body: JSON.stringify(data),
+export const put = async (route, data) => {
+    let response = await axios({
+        method: 'put',
+        url: `/api/${route}`,
+        data,
     });
-    return await response.json();
-}
+    return response.data;
+};
 
-export async function deleteByID(route, _id) {
-    if (token().expired()) await dispatch(attemptLogIn());
-    let response = await fetch(`/api/${route}/${_id}`, {
-        method: 'DELETE',
-        headers: getHeaders(),
+export const deleteByID = async (route, _id) => {
+    let response = await axios({
+        method: 'delete',
+        url: `/api/${route}/${_id}`,
     });
-    return await response.json();
-}
+    return response.data;
+};

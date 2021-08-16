@@ -1,8 +1,7 @@
 import * as accessToken from 'components/common/utils/accessToken.js';
 import UserState from 'components/common/utils/userState';
 import { hideUserOptions } from 'components/user_menu/state/UserMenuActions';
-import { getHeaders } from '../utils/api';
-
+import axios from 'axios';
 export function setUserState(payload) {
     return {
         type: 'USERSTATE/SET',
@@ -28,9 +27,7 @@ export function LogOut() {
         const token = () => getState().UserState.accessToken;
         try {
             if (token().expired()) await dispatch(attemptLogIn());
-            await fetch('/logout', {
-                headers: getHeaders(),
-            });
+            await axios.get('/logout');
             dispatch(hideUserOptions())
             dispatch(setUserState(new UserState()));
         } catch (error) {
