@@ -1,0 +1,12 @@
+@use 'styles/_layout';
+@use 'styles/_colors';
+
+.welcome-container {
+    margin-top: layout.$header-height;
+    width: 100%;
+
+    .login-form-container {
+        padding: 25px;
+        background-color: colors.$sidebar-bg;
+    }
+}
