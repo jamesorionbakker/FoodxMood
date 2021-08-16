@@ -16,7 +16,7 @@ export default function Activity(props) {
     
     useEffect( () => {
         dispatch(setActivity());
-    }, [state.view.activity]);
+    }, [state.view.currentView, state.activity.filter]);
     
     return (
         <div className="activity-container">

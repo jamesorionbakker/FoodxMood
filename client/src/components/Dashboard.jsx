@@ -17,7 +17,7 @@ export default function Dashboard(props) {
 
 
             {loggedIn && mobile ? <NavigationMenuMobile /> : <NavigationMenu />}
-            {loggedIn && viewState.activity.active && <Activity />}
+            {loggedIn && (viewState.currentView === 'activity') && <Activity />}
             {loggedIn && <UserMenu/>}
 
             {!loggedIn && mobile && <LoginForm />}

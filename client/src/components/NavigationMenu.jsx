@@ -1,36 +1,35 @@
 import React from 'react';
 import './NavigationMenu.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { ViewActivity } from './common/state/ViewActions';
-
+import { setCurrentView, setViewToActivity, setViewToAnalysis } from './common/state/ViewActions';
+import { setFilter } from './activity/state/ActivityActions';
 
 export default function Sidebar(props) {
-    
     let dispatch = useDispatch();
-    let viewportWidth = useSelector(state => state.view.viewportWidth)
+    let viewportWidth = useSelector((state) => state.view.viewportWidth);
     return (
-        <div className='navigation-menu-container'>
+        <div className="navigation-menu-container">
             <div className="nav-group">
                 <div className="nav-group-title">
                     <h5>Your Log</h5>
                 </div>
                 <div
                     onClick={() => {
-                        dispatch(ViewActivity('all'))
+                        dispatch(setViewToActivity('all'))
                     }}
                     className="nav-item">
                     <a href="#">All Activity</a>
                 </div>
                 <div
                     onClick={() => {
-                        dispatch(ViewActivity('meals'))
+                        dispatch(setViewToActivity('meals'))
                     }}
                     className="nav-item">
                     <a href="#">Meals</a>
                 </div>
                 <div
                     onClick={() => {
-                        dispatch(ViewActivity('health-checks'))
+                        dispatch(setViewToActivity('health-checks'))
                     }}
                     className="nav-item">
                     <a href="#">Wellness</a>
@@ -41,10 +40,18 @@ export default function Sidebar(props) {
                 <div className="nav-group-title">
                     <h5>Analysis</h5>
                 </div>
-                <div className="nav-item">
+                <div
+                    className="nav-item"
+                    onClick={() => {
+                        dispatch(setViewToAnalysis('analysis'));
+                    }}>
                     <a href="#">Food Items</a>
                 </div>
-                <div className="nav-item">
+                <div
+                    className="nav-item"
+                    onClick={() => {
+                        dispatch(setViewToAnalysis('analysis'));
+                    }}>
                     <a href="#">Symptoms</a>
                 </div>
                 <div className="nav-item-catagory"></div>

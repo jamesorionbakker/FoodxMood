@@ -8,11 +8,19 @@ div.navigation-menu-mobile-container {
     box-shadow: colors.$shadow-med;
     width: 100vw;
     bottom: 0px;
-    padding: 10px 0px;
+    //padding: 10px 0px;
     z-index: 1;
 
     div.nav-item {
+        padding: 10px;
+        height: layout.$nav-height-mobile;
         text-align: center;
+    }
+    div.active {
+        background-color: colors.$button-green-light-hover;
+    }
+    div.col {
+        padding: 0px;
     }
     a {
         font-family: 'Barlow', sans-serif;

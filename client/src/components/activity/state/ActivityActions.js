@@ -7,11 +7,11 @@ function loadingActivity(){
     }
 }
 
-export  function setActivity(filter) {
+export  function setActivity() {
     return async (dispatch, getState) => {
         try {
             dispatch(loadingActivity())
-            let filter = getState().view.activity.filter
+            let filter = getState().activity.filter
             let response = await API.get(`activity/${filter}`);
             let data = Object.fromEntries(response.map((entry)=>{ //CONVERTS ARRAY TO OBJECT KEYED BY _ID
                 let { _id } = entry
@@ -22,4 +22,11 @@ export  function setActivity(filter) {
             console.log(error)
         }
     };
+}
+
+export function setFilter(payload) {
+    return {
+        type: 'ACTIVITY/SET_FILTER',
+        payload
+    }
 }

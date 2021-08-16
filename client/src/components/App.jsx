@@ -4,10 +4,12 @@ import Dashboard from './Dashboard';
 import { useSelector, useDispatch } from 'react-redux';
 import { attemptLogIn } from './common/state/UserStateActions.js';
 import store from './common/state/Store';
-import { setViewportSize } from './common/state/viewportActions';
+import { setViewportSize } from './common/state/ViewportActions';
+import Welcome from './welcome/Welcome';
 
 function App() {
-    let userState = useSelector((state) => state.UserState);
+    let loggedIn = useSelector((state) => state.UserState.isLoggedIn);
+
     const dispatch = useDispatch();
 
     function handleResize() {
@@ -20,12 +22,16 @@ function App() {
             return 1;
         })(window.innerWidth);
         if (lastViewportSize !== currentViewportSize) {
-            dispatch(setViewportSize(currentViewportSize));
+            if (currentViewportSize < 3) {
+                dispatch(setViewportSize({ width: currentViewportSize, mobile: true }));
+            } else {
+                dispatch(setViewportSize({ width: currentViewportSize, mobile: false }));
+            }
         }
     }
 
     useEffect(() => {
-        handleResize()
+        handleResize();
         dispatch(attemptLogIn());
         window.addEventListener('resize', handleResize);
         return () => {
@@ -36,8 +42,8 @@ function App() {
     return (
         <div>
             <Header />
-
-            {userState.isLoggedIn && <Dashboard />}
+            {loggedIn && <Dashboard />}
+            {!loggedIn && <Welcome />}
         </div>
     );
 }
