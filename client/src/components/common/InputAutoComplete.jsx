@@ -20,6 +20,7 @@ export default function InputAutoComplete(props) {
     let [options, setOptions] = useState([]);
     let [selected, setSelected] = useState([]);
     let [currentSelection, setCurrentSelection] = useState();
+    let [lastSubmittedVal, setLastSubmittedVal] = useState();
 
     let inputText;
 
@@ -39,6 +40,7 @@ export default function InputAutoComplete(props) {
 
     function submitHandler(value) {
         if (value.length <= 0) return;
+        setLastSubmittedVal(value)
         let outputValue = value[0];
         let newItem = false;
         if (typeof outputValue === 'object') {
@@ -74,16 +76,16 @@ export default function InputAutoComplete(props) {
                 submitHandler(newSelection);
             }}
             onMenuToggle={(opening) => {
+                //if select on blur prop is true, and menu is being closed
                 if (selectOnBlur && !opening) {
-                    //if select on blur prop is true, and menu is being closed
                     if (inputText && currentSelection) {
                         setSelected([currentSelection]);
                         submitHandler([currentSelection]);
                         setCurrentSelection('');
-                    } else {
+                    } else if(!inputText) {
                         setSelected(['']);
                         submitHandler(['']);
-                    }
+                    }   
                 }
             }}
             highlightOnlyResult={selectOnBlur}
