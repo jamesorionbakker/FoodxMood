@@ -7,14 +7,14 @@ import healthChecks from './healthChecks.js';
 router.use('/meals', meals);
 router.use('/health-checks', healthChecks);
 
-router.get('/all', async (req, res) => {
-    let filters = {};
+router.get('/', async (req, res) => {
+    let filter = JSON.parse(req.query.filter)
     let username = req.authUser;
     let data = [
-        ...(await DB.Meal.find({ username, ...filters })),
-        ...(await DB.HealthCheck.find({ username, ...filters })),
+        ...(await DB.Meal.find({ username, ...filter })),
+        ...(await DB.HealthCheck.find({ username, ...filter })),
     ];
-    res.json(data);
+    res.send(data);
 });
 
 export default router;

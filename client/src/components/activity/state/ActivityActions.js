@@ -1,6 +1,5 @@
 import * as API from 'components/common/utils/api.js';
 
-
 function loadingActivity(){
     return {
         type: 'ACTIVITY/LOADING'
@@ -12,7 +11,8 @@ export  function setActivity() {
         try {
             dispatch(loadingActivity())
             let filter = getState().activity.filter
-            let response = await API.get(`activity/${filter}`);
+            console.log(filter)
+            let response = await API.get(`activity/?filter=${JSON.stringify(filter)}`);
             let data = Object.fromEntries(response.map((entry)=>{ //CONVERTS ARRAY TO OBJECT KEYED BY _ID
                 let { _id } = entry
                 return [_id, entry]
@@ -24,9 +24,9 @@ export  function setActivity() {
     };
 }
 
-export function setFilter(payload) {
+export function setFilter(query) {
     return {
         type: 'ACTIVITY/SET_FILTER',
-        payload
+        payload: query
     }
 }

@@ -1,8 +1,7 @@
 import React from 'react';
 import './NavigationMenu.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentView, setViewToActivity, setViewToAnalysis } from './common/state/ViewActions';
-import { setFilter } from './activity/state/ActivityActions';
+import { setViewToActivity, setViewToAnalysis } from './common/state/ViewActions';
 
 export default function Sidebar(props) {
     let dispatch = useDispatch();
@@ -15,21 +14,22 @@ export default function Sidebar(props) {
                 </div>
                 <div
                     onClick={() => {
-                        dispatch(setViewToActivity('all'))
+                        dispatch(setViewToActivity({$or: [ {type:'meal'}, {type: 'healthCheck'}]}))
                     }}
                     className="nav-item">
                     <a href="#">All Activity</a>
                 </div>
                 <div
                     onClick={() => {
-                        dispatch(setViewToActivity('meals'))
+                        dispatch(setViewToActivity({type: 'meal'}))
                     }}
+                    //{ingredients: {$elemMatch: {name: 'Sriracha'}}}
                     className="nav-item">
                     <a href="#">Meals</a>
                 </div>
                 <div
                     onClick={() => {
-                        dispatch(setViewToActivity('health-checks'))
+                        dispatch(setViewToActivity({type: 'healthCheck'}))
                     }}
                     className="nav-item">
                     <a href="#">Wellness</a>
