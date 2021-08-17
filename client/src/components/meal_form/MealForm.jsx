@@ -113,6 +113,7 @@ export default function MealForm(props) {
                     <Row>
                         <Col>
                             <InputAutoComplete
+                                allowNew
                                 submit={addIngredient}
                                 apiEndpoint="ingredients"
                                 clearOnSubmit
