@@ -1,4 +1,4 @@
-const initialState = { data: {}, loading: true, filter: {type: 'meal'} };
+const initialState = { data: {}, loading: true, filter: {$or: [ {type:'meal'}, {type: 'healthCheck'}]} };
 
 export default function ActivityReducer(state = initialState, action) {
     switch (action.type) {
