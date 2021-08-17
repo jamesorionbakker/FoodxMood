@@ -1,32 +1,38 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
-import { AsyncTypeahead } from 'react-bootstrap-typeahead';
+import { AsyncTypeahead, Hint, Menu } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import * as API from './utils/api.js';
+import { Form } from 'react-bootstrap';
 
 export default function InputAutoComplete(props) {
     let {
-        defaultInputValue,
         submit,
         placeholder,
         apiEndpoint,
         allowNewItems,
         suggestions,
-        clearOnSubmit
+        clearOnSubmit,
+        selectOnBlur,
     } = props;
-    
+
     let [isLoading, setIsLoading] = useState(false);
     let [options, setOptions] = useState([]);
-    let [value, setValue] = useState([]);
+    let [selected, setSelected] = useState([]);
+    let [currentSelection, setCurrentSelection] = useState();
+
+    let inputText;
 
     async function handleSearch(query) {
-        if (suggestions) { //if suggestions prop is supplied use supplied array
+        if (suggestions) {
+            //if suggestions prop is supplied use supplied array
             setOptions(suggestions);
-        } else { //if no suggestions prop is supplied, query api for suggestions
+        } else {
+            //if no suggestions prop is supplied, query api for suggestions
             setIsLoading(true);
             query = _.startCase(_.lowerCase(query));
             let url = `suggestions/${apiEndpoint}/${query}`;
-            setOptions(await API.get(url))
+            setOptions(await API.get(url));
             setIsLoading(false);
         }
     }
@@ -44,7 +50,7 @@ export default function InputAutoComplete(props) {
             postValue(outputValue);
         }
         submit(outputValue);
-        if(clearOnSubmit) setValue(['']);
+        if (clearOnSubmit) setSelected(['']);
     }
 
     async function postValue(value) {
@@ -61,14 +67,34 @@ export default function InputAutoComplete(props) {
             newSelectionPrefix="Add a new item: "
             isLoading={isLoading}
             options={options}
-            selected={value}
+            selected={selected}
             placeholder={placeholder}
-            onChange={(value) => {
-                setValue(value);
-                submitHandler(value);
+            onChange={(newSelection) => {   
+                setSelected(newSelection);
+                submitHandler(newSelection);
             }}
-            onSearch={handleSearch}
-            defaultInputValue={defaultInputValue ? defaultInputValue : ''}
-        />
+            onMenuToggle={(opening) => {
+                if (selectOnBlur && !opening) {
+                    //if select on blur prop is true, and menu is being closed
+                    if (inputText && currentSelection) {
+                        setSelected([currentSelection]);
+                        submitHandler([currentSelection]);
+                        setCurrentSelection('');
+                    } else {
+                        setSelected(['']);
+                        submitHandler(['']);
+                    }
+                }
+            }}
+            highlightOnlyResult={selectOnBlur}
+            onSearch={handleSearch}>
+            {selectOnBlur &&
+                ((state) => {
+                    inputText = state.text;
+                    //next line is a workaround, active index is not set if there is only one result
+                    if (state.results.length === 1) return setCurrentSelection(state.results[0]); 
+                    return setCurrentSelection(state.results[state.activeIndex]);
+                })}
+        </AsyncTypeahead>
     );
 }

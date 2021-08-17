@@ -66,6 +66,7 @@ export default function MealForm(props) {
                     <Row>
                         <Col xs={12}>
                             <InputAutoComplete
+                                selectOnBlur
                                 submit={(value) => {
                                     dispatch(formChange({ mealType: value }));
                                 }}
