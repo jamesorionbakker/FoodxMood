@@ -127,7 +127,7 @@ export default function HealthCheckForm() {
                         <Col>
                             <InputAutoComplete
                                 submit={addSymptom}
-                                allowNew
+                                allowNewItems
                                 clearOnSubmit
                                 placeholder="Add Symptoms One at a Time"
                                 apiEndpoint="symptoms"
