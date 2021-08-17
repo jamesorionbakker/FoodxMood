@@ -19,7 +19,7 @@ export default function Sidebar(props) {
                         <div
                             className={`nav-item ${currentView === 'activity' && 'active'}`}
                             onClick={() => {
-                                dispatch(setViewToActivity('all'));
+                                dispatch(setViewToActivity({$or: [ {type:'meal'}, {type: 'healthCheck'}]}));
                             }}>
                             <a href="#">
                                 <i className="fas fa-list-ul"></i>
