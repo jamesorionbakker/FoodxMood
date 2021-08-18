@@ -1,42 +1,58 @@
-
+// NOTES: 
 // brown hue is 40 or 38, green hue is 125.  other good combo is 40 and 200
+
+//HUES
 $green-hue: 125;
 $brown-hue: 40;
 
-//BACKGROUND COLORS
-$body-bg:hsl(43, 33%, 96%);
-$modal-bg:hsl(43, 33%, 100%);
-$header-bg: hsl($green-hue, 19%, 70%);
-$sidebar-bg: hsl($green-hue, 19%, 80%);
-$health-check-bg: hsl($brown-hue, 33%, 80%);
-$meal-bg: hsl($brown-hue, 33%, 90%);
-$entry-pill-bg: hsl($brown-hue, 53%, 86%);
+//MODIFIERS
 
+$saturation-multiplier: 1;
+$hue-shift: 0;
+$brightness-shift: 0%;
+
+//MIXINS AND FUNCTIONS
+
+@function themedColor($hue, $saturation, $brightness) {
+    @return hsl(
+        calc(#{$hue} + #{$hue-shift}),
+        calc(#{$saturation-multiplier} * #{$saturation}),
+        calc(#{$brightness} + #{$brightness-shift})
+    );
+}
+
+//BACKGROUND COLORS
+
+$body-bg: themedColor(43, 33%, 96%);
+$modal-bg: themedColor(43, 33%, 100%);
+$header-bg: themedColor($green-hue, 19%, 70%);
+$sidebar-bg: themedColor($green-hue, 19%, 80%);
+$health-check-bg: themedColor($brown-hue, 33%, 80%);
+$meal-bg: themedColor($brown-hue, 33%, 90%);
+$entry-pill-bg: themedColor($brown-hue, 53%, 86%);
 
 //BUTTON COLORS
-$button-green-dark: hsl($green-hue, 19%, 40%);
-$button-green-dark-hover: hsl($green-hue, 19%, 30%);
 
-$button-green-light: hsl($green-hue, 19%, 80%);
-$button-green-light-hover: hsl($green-hue, 19%, 70%);
+$button-green-dark: themedColor($green-hue, 19%, 40%);
+$button-green-dark-hover: themedColor($green-hue, 19%, 30%);
 
-$button-brown-light: hsl($brown-hue, 33%, 90%);
-$button-brown-light-hover: hsl($brown-hue, 33%, 80%);
+$button-green-light: themedColor($green-hue, 19%, 80%);
+$button-green-light-hover: themedColor($green-hue, 19%, 70%);
 
-$button-brown-dark: hsl($brown-hue, 53%, 86%);
-$button-brown-dark-hover: hsl($brown-hue, 53%, 76%);
+$button-brown-light: themedColor($brown-hue, 33%, 90%);
+$button-brown-light-hover: themedColor($brown-hue, 33%, 80%);
+
+$button-brown-dark: themedColor($brown-hue, 53%, 86%);
+$button-brown-dark-hover: themedColor($brown-hue, 53%, 76%);
 
 //FONT COLORS
-$font-brown: hsl(10, 15%, 31%);
-//$font-black: hsl(0, 0%, 0%);
-$font-white: hsl(0, 0%, 100%);
+
+$font-brown: themedColor(10, 15%, 31%);
+$font-white: themedColor(0, 0%, 100%);
 
 //SHADOWS
 
-$shadow-med: 0px 0px 5px hsla(0,0,0,0.3);
-$shadow-light: 0px 0px 5px rgba(192, 99, 99, 0.15);
-$text-shadow: 0px 0px 10px hsla(0,0,0,.15);
+$shadow-med: 0px 0px 5px hsla(0, 0, 0, 0.3);
+$shadow-light: 0px 0px 5px hsla(0, 42%, 57%, 0.15);
+$text-shadow: 0px 0px 10px hsla(0, 0, 0, 0.15);
 
-//OLD COLORS
-// $sidebar-bg: hsl(40, 53%, 86%);
-// $header-bg: hsl(40, 53%, 76%);
