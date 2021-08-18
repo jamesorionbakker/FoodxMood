@@ -10,11 +10,11 @@ import _ from 'lodash';
 
 import InputAutoComplete from 'components/common/InputAutoComplete';
 import { closeMealForm, deleteIngredient, formChange } from './state/MealFormActions';
-import Pill from 'components/IngredientPill';
 import * as API from 'components/common/utils/api';
 import { stringToUnixTime } from 'components/common/utils/DateHandler';
 import './MealForm.scss';
 import { setActivity } from 'components/activity/state/ActivityActions';
+import Pill from 'components/Pill';
 
 export default function MealForm(props) {
     let [processing, setProcessing] = useState(false);
@@ -123,14 +123,18 @@ export default function MealForm(props) {
                         </Col>
                     </Row>
                     <div className="ingredient-list">
-                        {state.ingredients.map((ingredient) => {
+                        {state.ingredients.map((ingredient, index) => {
                             return (
                                 <Pill
-                                    onClick={() => {
+                                    key={index}
+                                    deleteable
+                                    margin="10px"
+                                    onDelete={() => {
                                         dispatch(deleteIngredient(ingredient));
                                     }}
-                                    key={ingredient.id}
-                                    primaryText={ingredient.name}
+                                    text={ingredient.name}
+                                    color="brown"
+                                    size="md"
                                 />
                             );
                         })}
@@ -138,7 +142,7 @@ export default function MealForm(props) {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button  variant="default" onClick={handleClose}>
+                <Button variant="default" onClick={handleClose}>
                     Cancel
                 </Button>
                 {state.new && (

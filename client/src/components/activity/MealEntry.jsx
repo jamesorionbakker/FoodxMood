@@ -47,7 +47,7 @@ export default function MealEntry(props) {
                                 <Col xs={true}>
                                     {ingredients.map((ingredient, index) => {
                                         return (
-                                            <Pill key={index} text={ingredient.name} color="red" />
+                                            <Pill margin={5} key={index} text={ingredient.name} color="brown" size="sm" />
                                         );
                                     })}
                                 </Col>

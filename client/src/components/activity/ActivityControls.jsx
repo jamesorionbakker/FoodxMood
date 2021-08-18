@@ -3,6 +3,7 @@ import './ActivityControls.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { newMeal } from 'components/meal_form/state/MealFormActions';
 import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { newHealthCheck } from 'components/health_check_form/state/healthCheckFormActions';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -11,6 +12,7 @@ import Container from 'react-bootstrap/Container';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useState } from 'react';
 import { addFilterKeyword, deleteFilterKeyword } from './state/ActivityActions';
+import Pill from 'components/Pill';
 
 export default function AddButtonsContainer(props) {
     let [filterInput, setFilterInput] = useState({ value: '', valid: false });
@@ -22,30 +24,6 @@ export default function AddButtonsContainer(props) {
             return;
         dispatch(addFilterKeyword(filterInput.value));
         setFilterInput({ value: '', valid: false });
-
-        // dispatch(
-        //     setFilterType({
-        //         $or: [
-        //             {
-        //                 ingredients: {
-        //                     $elemMatch: {
-        //                         name: { $regex: e.target.value, $options: 'i' },
-        //                     },
-        //                 },
-        //             },
-        //             {
-        //                 symptoms: {
-        //                     $elemMatch: {
-        //                         description: { $regex: e.target.value, $options: 'i' },
-        //                     },
-        //                 },
-        //             },
-        //             {
-        //                 mealType: { $regex: e.target.value, $options: 'i' },
-        //             },
-        //         ],
-        //     })
-        // );
     }
 
     return (
@@ -104,13 +82,25 @@ export default function AddButtonsContainer(props) {
                 {currentKeywordFilters.map((keyword, i) => {
                     return (
                         <Col key={i} className="bs-col filter-instance" xs="auto">
-                            <Button
-                                onClick={() => {
+                            <Pill
+                                text={keyword}
+                                size="lg"
+                                color="brown"
+                                deleteable
+                                onDelete={() => {
                                     dispatch(deleteFilterKeyword(keyword));
                                 }}
-                                className="button-dark-brown strike-on-hover">
-                                {keyword}
-                            </Button>
+                            />
+                            {/* <ButtonGroup>
+                                <div className="keyword">{keyword}</div>
+                                <Button
+                                    onClick={() => {
+                                        dispatch(deleteFilterKeyword(keyword));
+                                    }}
+                                    className="button-dark-brown delete-keyword">
+                                    <i className="fas fa-times"></i>
+                                </Button>
+                            </ButtonGroup> */}
                         </Col>
                     );
                 })}

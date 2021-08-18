@@ -9,7 +9,7 @@ import _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeHealthCheckForm, formChange, deleteSymptom } from './state/healthCheckFormActions';
 import InputAutoComplete from 'components/common/InputAutoComplete';
-import Pill from 'components/IngredientPill';
+import Pill from 'components/Pill';
 import * as API from 'components/common/utils/api';
 import { stringToUnixTime } from 'components/common/utils/DateHandler';
 import './HealthCheckForm.scss';
@@ -138,12 +138,15 @@ export default function HealthCheckForm() {
                         {state.symptoms.map((symptom, index) => {
                             return (
                                 <Pill
-                                    onClick={() => {
+                                    key={index}
+                                    text={symptom.description}
+                                    deleteable
+                                    margin="10px"
+                                    onDelete={() => {
                                         dispatch(deleteSymptom(symptom));
                                     }}
-                                    index={index}
-                                    key={index}
-                                    primaryText={symptom.description}
+                                    color="brown"
+                                    size="md"
                                 />
                             );
                         })}

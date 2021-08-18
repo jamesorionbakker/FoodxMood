@@ -33,11 +33,7 @@ export default function HealthCheckEntry(props) {
                                 <Col xs={true}>
                                     {symptoms.map((symptom, index) => {
                                         return (
-                                            <Pill
-                                                key={index}
-                                                text={symptom.description}
-                                                color="green"
-                                            />
+                                            <Pill margin={5} key={index} text={symptom.description} color="brown" size="sm" />
                                         );
                                     })}
                                 </Col>

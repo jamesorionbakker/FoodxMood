@@ -1,23 +1,33 @@
 @import 'styles/_colors.scss';
 
-.pill {
-    box-shadow: $shadow-light;
-    margin-right: 10px;
-    margin-bottom: 5px;
-    font-size: 1em;
-    display: inline-block;
-
-    .pill-primary {
-        font-weight: 500;
-        display: inline-block;
-        padding: 0px 4px;
+ div.pill-container {
+    .pill-body {
+        border-radius: 0.25rem;
         margin: 0;
-        border-radius: 5px;
+        white-space: nowrap;
+    }
+    .pill-deleteable {
+        border-radius: 0.25rem 0 0 0.25rem;
+    }
+    .pill-brown {
         background-color: $entry-pill-bg;
     }
-}
-.pill:hover {
-    $hover: hsl(88, 30%, 80%);
-    opacity: 0.8;
-    cursor: pointer;
+    .pill-sm {
+        padding: 0px 4px;
+    }
+    .pill-md {
+        padding: 5px 9px;
+    }
+    .pill-lg {
+        padding: 6px 12px;
+    }
+    button.delete-btn-sm {
+        padding: 0px 4px;
+    }
+    button.delete-btn-md {
+        padding: 5px 9px;
+    }
+    button.delete-btn-lg {
+        padding: 6px 12px;
+    }
 }
