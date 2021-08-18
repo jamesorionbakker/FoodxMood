@@ -43,3 +43,10 @@ div.loading-spinner {
     left: calc(50% - 1rem);
     top: 50%;
 }
+div.clear-margin-padding {
+    margin: 0;
+    padding: 0;
+}
+.strike-on-hover:hover {
+    text-decoration: line-through;
+}

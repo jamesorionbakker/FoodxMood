@@ -9,7 +9,7 @@ export function setCurrentView(view){
 
 export function setViewToActivity(payload){
     return (dispatch) => {
-        dispatch(activityActions.setFilter(payload))
+        dispatch(activityActions.setFilterType(payload))
         dispatch(setCurrentView('activity'))
     }
 }

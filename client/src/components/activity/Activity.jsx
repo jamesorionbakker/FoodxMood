@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './Activity.scss';
 import DateBlock from './DateBlock.jsx';
-import AddButtonsContainer from 'components/activity/AddButtonsContainer';
+import ActivityControls from 'components/activity/ActivityControls';
 import MealForm from 'components/meal_form/MealForm';
 import * as FeedArray from './utils/feedArray';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,11 +16,11 @@ export default function Activity(props) {
 
     useEffect(() => {
         dispatch(setActivity());
-    }, [state.view.currentView, state.activity.filter]);
+    }, [state.view.currentView, state.activity.filters]);
 
     return (
         <div className="activity-container">
-            <AddButtonsContainer />
+            <ActivityControls />
             <MealForm />
             <HealthCheckForm />
             {loaded ? (

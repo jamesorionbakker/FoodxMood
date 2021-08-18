@@ -38,7 +38,7 @@ export default function MealForm(props) {
         } catch (error) {
             console.log(error);
             setProcessing(false);
-            handleClose();
+            //handleClose();
         }
     }
     async function handleClose() {
