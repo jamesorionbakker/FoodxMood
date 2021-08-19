@@ -83,7 +83,7 @@ export default function AddButtonsContainer(props) {
                     return (
                         <Col key={i} className="bs-col filter-instance" xs="auto">
                             <Pill
-                                text={keyword}
+                                text={'#' + keyword}
                                 size="lg"
                                 color="brown"
                                 deleteable
@@ -91,16 +91,6 @@ export default function AddButtonsContainer(props) {
                                     dispatch(deleteFilterKeyword(keyword));
                                 }}
                             />
-                            {/* <ButtonGroup>
-                                <div className="keyword">{keyword}</div>
-                                <Button
-                                    onClick={() => {
-                                        dispatch(deleteFilterKeyword(keyword));
-                                    }}
-                                    className="button-dark-brown delete-keyword">
-                                    <i className="fas fa-times"></i>
-                                </Button>
-                            </ButtonGroup> */}
                         </Col>
                     );
                 })}

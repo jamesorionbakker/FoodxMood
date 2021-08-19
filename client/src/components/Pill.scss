@@ -12,6 +12,10 @@
     .pill-brown {
         background-color: $entry-pill-bg;
     }
+    .pill-highlight {
+        background-color: $entry-pill-bg-hightlight;
+        border: 1px dashed black;
+    }
     .pill-sm {
         padding: 0px 4px;
     }

@@ -6,10 +6,14 @@ import Pill from '../Pill.jsx';
 import './Entry.scss';
 import ManageEntry from './ManageEntry.jsx';
 import dayjs from 'dayjs';
+import { useSelector } from 'react-redux';
+
 
 export default function HealthCheckEntry(props) {
     let { entry } = props;
     let { symptoms, time } = entry;
+    let currentKeywordFilters = useSelector(state => state.activity.filters.keywords)
+
     return (
         <Container className="entry-container" fluid>
             <Row>
@@ -32,8 +36,11 @@ export default function HealthCheckEntry(props) {
                                 </Col>
                                 <Col xs={true}>
                                     {symptoms.map((symptom, index) => {
+                                        let matchesKeyword = currentKeywordFilters.some(keyword=>{
+                                            return symptom.description.match(new RegExp(keyword, 'gi'))
+                                        })
                                         return (
-                                            <Pill margin={5} key={index} text={symptom.description} color="brown" size="sm" />
+                                            <Pill margin={5} key={index} highlight={matchesKeyword} text={symptom.description} color="brown" size="sm" />
                                         );
                                     })}
                                 </Col>

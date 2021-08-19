@@ -6,10 +6,12 @@ import Col from 'react-bootstrap/Col';
 import Pill from '../Pill.jsx';
 import ManageEntry from './ManageEntry';
 import './Entry.scss';
+import { useSelector } from 'react-redux';
 
 export default function MealEntry(props) {
     let { entry } = props;
     let { ingredients, mealType, time } = entry;
+    let currentKeywordFilters = useSelector(state => state.activity.filters.keywords)
 
     function getEmoji(type) {
         return {
@@ -46,8 +48,11 @@ export default function MealEntry(props) {
                                 </Col>
                                 <Col xs={true}>
                                     {ingredients.map((ingredient, index) => {
+                                        let matchesKeyword = currentKeywordFilters.some(keyword=>{
+                                            return ingredient.name.match(new RegExp(keyword, 'gi'))
+                                        })
                                         return (
-                                            <Pill margin={5} key={index} text={ingredient.name} color="brown" size="sm" />
+                                            <Pill margin={5} highlight={matchesKeyword} key={index} text={ingredient.name} color="brown" size="sm" />
                                         );
                                     })}
                                 </Col>
