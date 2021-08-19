@@ -28,9 +28,9 @@ router.post('/', async (req, res) => {
             time,
             username,
         });
-        await meal.save();
+        let response = await meal.save();
         res.status(200);
-        res.json({});
+        res.json(response);
     } catch (error) {
         console.log(error);
         res.sendStatus(500);
@@ -50,15 +50,15 @@ router.put('/:_id', async (req, res) => {
             linkedIngredients.push({ name, id });
         }
 
-        await DB.Meal.findByIdAndUpdate(_id, {
+        let response = await DB.Meal.findByIdAndUpdate(_id, {
             ingredients: linkedIngredients,
             type: 'meal',
             mealType,
             time,
             username,
-        });
+        }, {new: true});
         res.status(200);
-        res.json({});
+        res.json(response);
     } catch (error) {
         console.log(error);
         res.status(500);

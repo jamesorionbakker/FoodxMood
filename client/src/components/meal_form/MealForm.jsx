@@ -13,7 +13,7 @@ import { closeMealForm, deleteIngredient, formChange } from './state/MealFormAct
 import * as API from 'components/common/utils/api';
 import { stringToUnixTime } from 'components/common/utils/DateHandler';
 import './MealForm.scss';
-import { setActivity } from 'components/activity/state/ActivityActions';
+import { insertEntryLocal, updateEntryLocal } from 'components/activity/state/ActivityActions';
 import Pill from 'components/Pill';
 
 export default function MealForm(props) {
@@ -30,11 +30,19 @@ export default function MealForm(props) {
                 type: state.mealType,
                 time: unixTime,
             };
-            if (state.new) await API.post('activity/meals', newMeal);
-            if (state.edit) await API.put('activity/meals/' + state._id, newMeal);
+            if (state.new) {
+                let newEntry = await API.post('activity/meals', newMeal);
+                dispatch(insertEntryLocal(newEntry));
+            }
+            if (state.edit) {
+                let updatedEntry = await API.put('activity/meals/' + state._id, newMeal);
+                dispatch(updateEntryLocal(updatedEntry));
+
+            }
             setProcessing(false);
             handleClose();
-            dispatch(setActivity());
+
+            //dispatch(loadInitialActivity());
         } catch (error) {
             console.log(error);
             setProcessing(false);

@@ -1,8 +1,24 @@
 import * as API from 'components/common/utils/api.js';
 
-function loadingActivity() {
+function objectFromArray(inputArray) {
+    return Object.fromEntries(
+        inputArray.map((entry) => {
+            //CONVERTS ARRAY TO OBJECT KEYED BY _ID
+            let { _id } = entry;
+            return [_id, entry];
+        })
+    );
+}
+
+function loadingInitialActivity() {
     return {
-        type: 'ACTIVITY/LOADING',
+        type: 'ACTIVITY/LOADING_INITIAL',
+    };
+}
+
+function loadingMoreActivity() {
+    return {
+        type: 'ACTIVITY/LOADING_MORE',
     };
 }
 
@@ -37,28 +53,87 @@ function buildQuery(getState) {
         andArray.push(buildKeywordQuery(keywords));
     }
     console.log(andArray);
-
     return { $and: andArray };
 }
 
-export function setActivity() {
+export function loadInitialActivity() {
     return async (dispatch, getState) => {
         try {
-            dispatch(loadingActivity());
+            dispatch(loadingInitialActivity());
             let query = buildQuery(getState);
-            console.log(JSON.stringify(query));
-            let response = await API.get(`activity/?filter=${JSON.stringify(query)}`);
-            let data = Object.fromEntries(
-                response.map((entry) => {
-                    //CONVERTS ARRAY TO OBJECT KEYED BY _ID
-                    let { _id } = entry;
-                    return [_id, entry];
-                })
+            let { data: dataArray, totalEntryCount } = await API.get(
+                `activity/?filter=${JSON.stringify(query)}`
             );
-            dispatch({ type: 'ACTIVITY/SET_DATA', payload: { data, loading: false } });
+            dispatch({
+                type: 'ACTIVITY/INSERT_INITIAL_ACTIVITY',
+                payload: {
+                    data: objectFromArray(dataArray),
+                    localEntriesCount: dataArray.length,
+                },
+            });
+            dispatch({
+                type: 'ACTIVITY/SET_TOTAL_ENTRIES_COUNT',
+                payload: totalEntryCount,
+            });
         } catch (error) {
             console.log(error);
         }
+    };
+}
+
+export function loadMoreActivity() {
+    return async (dispatch, getState) => {
+        try {
+            dispatch(loadingMoreActivity());
+            let query = buildQuery(getState);
+            let { data: dataArray, totalEntryCount } = await API.get(
+                `activity/?filter=${JSON.stringify(query)}&skip=${getState().activity.localEntriesCount}`
+            );
+            console.log(dataArray)
+            dispatch({
+                type: 'ACTIVITY/INSERT_MORE_ACTIVITY',
+                payload: {
+                    data: objectFromArray(dataArray),
+                },
+            });
+            dispatch(incrementLocalEntryCount(dataArray.length));
+        } catch (error) {
+            console.log(error);
+        }
+    };
+}
+
+export function insertEntryLocal(newEntry) {
+    return (dispatch) => {
+        dispatch({
+            type: 'ACTIVITY/INSERT_ENTRY_LOCAL',
+            payload: { [newEntry._id]: newEntry },
+        });
+        dispatch(incrementLocalEntryCount());
+    };
+}
+
+export function updateEntryLocal(updateEntry) {
+    console.log({ [updateEntry._id]: updateEntry });
+    return (dispatch) => {
+        dispatch({
+            type: 'ACTIVITY/UPDATE_ENTRY_LOCAL',
+            payload: { [updateEntry._id]: updateEntry },
+        });
+    };
+}
+
+function incrementLocalEntryCount(x) {
+    return {
+        type: 'ACTIVITY/INCREMENT_LOCAL_ENRTY_COUNT',
+        payload: x,
+    };
+}
+
+function decrementLocalEntryCount(x) {
+    return {
+        type: 'ACTIVITY/DECREMENT_LOCAL_ENRTY_COUNT',
+        payload: x,
     };
 }
 

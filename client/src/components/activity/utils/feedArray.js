@@ -34,7 +34,7 @@ export const build = (activityEntriesObj) => {
         }
         let lastEntry = currArray[index - 1];
         if (lastEntry.date === currEntry.date) {
-            output[output.length - 1].unshift(currEntry);
+            output[output.length - 1].push(currEntry);
             return output;
         }
         output.push([currEntry]);

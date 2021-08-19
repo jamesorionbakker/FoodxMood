@@ -2,7 +2,7 @@ import React from 'react';
 import * as API from '../common/utils/api.js';
 import { useDispatch } from 'react-redux';
 import { editMeal } from 'components/meal_form/state/MealFormActions';
-import { setActivity } from 'components/activity/state/ActivityActions';
+import { loadInitialActivity } from 'components/activity/state/ActivityActions';
 import { editHealthCheck } from 'components/health_check_form/state/healthCheckFormActions.js';
 
 export default function ManageEntry(props) {
@@ -16,7 +16,7 @@ export default function ManageEntry(props) {
         e.preventDefault();
         try {
             await API.deleteByID(`activity/${endpoint}`, _id);
-            dispatch(setActivity());
+            dispatch(loadInitialActivity());
         } catch (error) {
             console.error(error);
         }

@@ -9,12 +9,17 @@ router.use('/health-checks', healthChecks);
 
 router.get('/', async (req, res) => {
     try {
-        let filter = JSON.parse(req.query.filter)
+        let filter = JSON.parse(req.query.filter);
+        let skip = req.query.skip ? parseInt(req.query.skip) : 0;
         let username = req.authUser;
-        let data = await DB.Activity.find({ username, ...filter });
-        res.send(data);
+        let totalEntryCount = await DB.Activity.countDocuments({ username, ...filter });
+        let data = await DB.Activity.find({ username, ...filter })
+            .sort({ time: 'desc' })
+            .skip(skip)
+            .limit(10);
+        res.send({ data, totalEntryCount });
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 });
 

@@ -13,7 +13,7 @@ import Pill from 'components/Pill';
 import * as API from 'components/common/utils/api';
 import { stringToUnixTime } from 'components/common/utils/DateHandler';
 import './HealthCheckForm.scss';
-import { setActivity } from 'components/activity/state/ActivityActions';
+import { insertEntryLocal, updateEntryLocal } from 'components/activity/state/ActivityActions';
 
 export default function HealthCheckForm() {
     let [processing, setProcessing] = useState(false);
@@ -32,7 +32,6 @@ export default function HealthCheckForm() {
     }
     function addSymptom(newSymptom) {
         newSymptom = _.startCase(_.lowerCase(newSymptom));
-        console.log(state.symptoms);
         if (state.symptoms.map((symptom) => symptom.description).includes(newSymptom)) return;
         dispatch(
             formChange({
@@ -49,15 +48,19 @@ export default function HealthCheckForm() {
                 mood: state.mood,
                 time: unixTime,
             };
-            if (state.new) await API.post('activity/health-checks', newHealthCheck);
-            if (state.edit) await API.put('activity/health-checks/' + state._id, newHealthCheck);
+            if (state.new) {
+                let newEntry = await API.post('activity/health-checks', newHealthCheck);
+                dispatch(insertEntryLocal(newEntry));
+            }
+            if (state.edit) {
+                let updatedEntry = await API.put('activity/health-checks/' + state._id, newHealthCheck);
+                dispatch(updateEntryLocal(updatedEntry));
+            }
             setProcessing(false);
             handleClose();
-            dispatch(setActivity());
         } catch (error) {
             console.log(error);
             setProcessing(false);
-            handleClose();
         }
     }
 

@@ -29,9 +29,9 @@ router.post('/', async (req, res) => {
             mood,
             type: 'healthCheck',
         });
-        await healthCheck.save();
+        let response = await healthCheck.save();
         res.status(200);
-        res.json({});
+        res.json(response);
     } catch (error) {
         console.log(error);
         res.sendStatus(500);
@@ -49,15 +49,15 @@ router.put('/:_id', async (req, res) => {
             linkedSymptoms.push({ description, id });
         }
 
-        await DB.HealthCheck.findByIdAndUpdate(_id, {
+        let response = await DB.HealthCheck.findByIdAndUpdate(_id, {
             username,
             symptoms: linkedSymptoms,
             time,
             mood,
             type: 'healthCheck',
-        });
+        }, {new: true});
         res.status(200);
-        res.json({});
+        res.json(response);
     } catch (error) {
         console.log(error);
         res.status(500);
