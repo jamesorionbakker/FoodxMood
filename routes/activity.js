@@ -9,13 +9,9 @@ router.use('/health-checks', healthChecks);
 
 router.get('/', async (req, res) => {
     try {
-        console.log(req.query.filter)
         let filter = JSON.parse(req.query.filter)
         let username = req.authUser;
-        let data = [
-            ...(await DB.Meal.find({ username, ...filter })),
-            ...(await DB.HealthCheck.find({ username, ...filter })),
-        ];
+        let data = await DB.Activity.find({ username, ...filter });
         res.send(data);
     } catch (error) {
         console.log(error)

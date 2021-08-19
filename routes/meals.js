@@ -2,6 +2,7 @@ import express from 'express';
 let router = express.Router();
 import * as DB from '../db.js';
 
+
 router.get('/', async (req, res) => {
     let filters = {};
     let username = req.authUser;
@@ -75,6 +76,5 @@ router.delete('/:_id', async (req, res) => {
         res.status(500);
     }
 });
-
 
 export default router;

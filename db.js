@@ -17,12 +17,13 @@ export function connect() {
     });
 }
 
-export const Meal = mongoose.model('meals', mealSchema);
-export const HealthCheck = mongoose.model('healthCheck', healthCheckSchema);
+export const Meal = mongoose.model('meals', mealSchema, 'activity');
+export const HealthCheck = mongoose.model('healthCheck', healthCheckSchema, 'activity');
 export const Ingredient = mongoose.model('ingredient', ingredientSchema);
 export const Symptom = mongoose.model('symptom', symptomSchema);
 export const User = mongoose.model('user', userDBSchema);
 export const RefreshToken = mongoose.model('refreshToken', refreshTokenSchema);
+export const Activity = mongoose.model('activity', new mongoose.Schema({}), 'activity') //ONLY FOR QUERIES
 
 export async function addMeal(meal) {
     let entry = new Meal({
