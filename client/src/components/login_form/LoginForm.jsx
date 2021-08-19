@@ -29,6 +29,8 @@ export default function LoginForm() {
                         <Row className="form-row">
                             <Col className="form-col" md="auto">
                                 <Form.Control
+                                    autoCorrect="off" 
+                                    autoCapitalize="none"
                                     isInvalid={state.invalidUsername}
                                     name="username"
                                     className="username"
