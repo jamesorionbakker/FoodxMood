@@ -35,16 +35,16 @@ export default function Activity(props) {
                     {FeedArray.build(state.activity.data).map((dateBlock, index) => {
                         return <DateBlock key={index} index={index} entries={dateBlock} />;
                     })}
-                    {/* LOADED ENTRIES MESSAGE */}
-                    <div style={{ textAlign: 'center' }}>
-                        <em style={{ fontSize: '.8em' }}>
+                    {/* LOADED ENTRIES MESSAGE (example: 10 of 25...)*/}
+                    <div style={{ textAlign: 'center', marginBottom: '-1rem' }}>
+                        <em style={{ fontSize: '.8em'}}>
                             viewing {localEntriesCount} of {totalEntriesCount}
                         </em>
                     </div>
                     {/* LOAD MORE ENTRIES BUTTON */}
                     {totalEntriesCount > localEntriesCount && (
                         <div className="load-more-button-container">
-                            <hr />
+                            <hr style={{marginBottom: '10px'}} />
                             <Button
                                 style={{ width: '100%' }}
                                 className="button-dark-brown"

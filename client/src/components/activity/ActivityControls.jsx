@@ -27,7 +27,7 @@ export default function AddButtonsContainer(props) {
     }
 
     return (
-        <Container className="activity-controls-container">
+        <Container className="activity-controls-container" fluid>
             <Row>
                 <Col className="bs-col" xs={6} md="auto">
                     <Button

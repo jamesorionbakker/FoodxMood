@@ -1,16 +1,21 @@
 @import 'styles/_colors.scss';
 
 div.activity-controls-container {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+
+    div.row {
+        margin: 0 -5px;
+    }
     input {
         border-color: $button-brown-light;
     }
 
-    width: 100%;
-    margin: 0px;
-    
-    div.bs-col {
-        margin-bottom: 10px;
-        padding: 0 10px 0 0 ;
+    div.bs-col:not(:last-child) {
+        @media screen and (max-width: 767px) {
+            margin-bottom: 10px;
+        }
     }
     div.keyword {
         background-color: $button-brown-dark;

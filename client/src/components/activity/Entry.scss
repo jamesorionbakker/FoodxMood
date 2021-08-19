@@ -1,12 +1,13 @@
 @import 'styles/_colors.scss';
 div.entry-container {
-    // padding-left: 0px;
-    margin: 10px 0px;
+    margin: 0 0 10px 0px;
+}
+div.entry-container:last-child {
+    margin: 0;
 }
 div.time-container {
     padding-left: 0px;
     min-width: 75px;
-    // max-width: 75px;
     opacity: 0.8;
     display: flex;
     align-items: center;

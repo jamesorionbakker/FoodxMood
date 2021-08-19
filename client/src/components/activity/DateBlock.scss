@@ -1,19 +1,18 @@
 @use 'styles/_colors.scss';
 @use 'styles/_layout.scss';
 
-.date-block-container {
+div.date-block-container {
     position: relative;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin: 1rem 0;
+    padding: 0px;
     
     .date-container {
         font-size: 1.2em;
         height: 100%;
-        //width: 40px;
         display: flex;
         align-items: center;
         @media screen and (max-width: 767px) {
-            position: sticky;
             top: 80px;
             display: block;
             width: 100%;
@@ -22,7 +21,7 @@
         }
     }
     div.date-col {
-        width: 85px;
+        min-width: 85px;
         margin-right: 10px;
     }
     div.entries-col {

@@ -1,4 +1,7 @@
-@import '~bootstrap/scss/bootstrap';
+//BOOTSTRAP OVERIDES
+$grid-gutter-width: 12px;
+
+@import '~bootstrap/scss/bootstrap.scss';
 @import 'styles/_colors.scss';
 @import 'styles/_buttons.scss';
 @import 'styles/_fonts.scss';
@@ -6,7 +9,7 @@
 * {
     box-sizing: border-box;
     font-family: $font-condensed;
-    color: $font-brown;
+    color: $font-brown; 
 }
 input,
 button,
