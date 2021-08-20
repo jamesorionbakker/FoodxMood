@@ -78,6 +78,40 @@ i.manage-icon {
 .meal-entry-container::after {
     border-right-color: $meal-bg;
 }
+div.add-missing-health-check-container {
+    z-index: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: 767px) {
+        margin-bottom: -34px;
+    }
+
+    button {
+        border-radius: 7px;
+        padding: 5px 9px;
+        position: relative;
+        margin: 0 0 10px 0;
+        // border: 1px dashed $font-brown 
+    }
+    button::after {
+        z-index: -1;
+        position: absolute;
+        left: calc(50% - 10px);
+        bottom: -10px;
+        content: '';
+        width: 0;
+        height: 0;
+        border-top: solid 10px $button-light-red;
+        border-left: solid 10px transparent;
+        border-right: solid 10px transparent;
+    }
+    button:hover::after {
+        border-top: solid 10px $button-light-red;
+    }
+}
 
 @media screen and (max-width: 768px) {
     div.time-container {

@@ -51,10 +51,14 @@ $button-brown-light-hover: themedColor($brown-hue, 33%, 80%);
 $button-brown-dark: themedColor($brown-hue, 53%, 86%);
 $button-brown-dark-hover: themedColor($brown-hue, 53%, 76%);
 
+$button-light-red: themedColor(10, 70%, 70%);
+$button-light-red-hover: themedColor(10, 70%, 60%);
+
 //FONT COLORS
 
 $font-brown: themedColor(10, 15%, 31%);
 $font-white: themedColor(0, 0%, 100%);
+$font-red: themedColor(10, 70%, 50%);
 
 //SHADOWS
 

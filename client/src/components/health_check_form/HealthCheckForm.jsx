@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -18,6 +19,7 @@ import { insertEntryLocal, updateEntryLocal } from 'components/activity/state/Ac
 export default function HealthCheckForm() {
     let [processing, setProcessing] = useState(false);
     let state = useSelector((state) => state.healthCheckForm);
+    let { timeInputType, baselineTime } = useSelector((state) => state.healthCheckForm);
     let dispatch = useDispatch();
 
     function handleClose() {
@@ -42,7 +44,15 @@ export default function HealthCheckForm() {
     async function handleSubmit() {
         try {
             setProcessing(true);
-            let unixTime = stringToUnixTime(state.dateString, state.timeString);
+            let unixTime;
+            if(timeInputType === 'absolute'){
+                unixTime = stringToUnixTime(state.dateString, state.timeString);
+            } else {
+                let secondsSinceBaseline = 0;
+                if(state.hoursSinceBaseline) secondsSinceBaseline += (state.hoursSinceBaseline * 3600)
+                if(state.minutesSinceBaseline) secondsSinceBaseline += (state.minutesSinceBaseline * 60)
+                unixTime = baselineTime + secondsSinceBaseline;
+            }   
             let newHealthCheck = {
                 symptoms: state.symptoms.map((symptom) => symptom.description),
                 mood: state.mood,
@@ -53,7 +63,10 @@ export default function HealthCheckForm() {
                 dispatch(insertEntryLocal(newEntry));
             }
             if (state.edit) {
-                let updatedEntry = await API.put('activity/health-checks/' + state._id, newHealthCheck);
+                let updatedEntry = await API.put(
+                    'activity/health-checks/' + state._id,
+                    newHealthCheck
+                );
                 dispatch(updateEntryLocal(updatedEntry));
             }
             setProcessing(false);
@@ -72,36 +85,76 @@ export default function HealthCheckForm() {
             </Modal.Header>
             <Modal.Body>
                 <div className="health-check-form-container">
-                    <Row>
-                        <Col xs={6}>
-                            <Form.Control
-                                type="date"
-                                name="date"
-                                value={state.dateString}
-                                onChange={(e) => {
-                                    dispatch(
-                                        formChange({
-                                            dateString: e.target.value,
-                                        })
-                                    );
-                                }}
-                            />
-                        </Col>
-                        <Col xs={6}>
-                            <Form.Control
-                                type="time"
-                                name="time"
-                                value={state.timeString}
-                                onChange={(e) => {
-                                    dispatch(
-                                        formChange({
-                                            timeString: e.target.value,
-                                        })
-                                    );
-                                }}
-                            />
-                        </Col>
-                    </Row>
+                    {timeInputType === 'absolute' && (
+                        <Row>
+                            <Col xs={6}>
+                                <Form.Control
+                                    type="date"
+                                    name="date"
+                                    value={state.dateString}
+                                    onChange={(e) => {
+                                        dispatch(
+                                            formChange({
+                                                dateString: e.target.value,
+                                            })
+                                        );
+                                    }}
+                                />
+                            </Col>
+                            <Col xs={6}>
+                                <Form.Control
+                                    type="time"
+                                    name="time"
+                                    value={state.timeString}
+                                    onChange={(e) => {
+                                        dispatch(
+                                            formChange({
+                                                timeString: e.target.value,
+                                            })
+                                        );
+                                    }}
+                                />
+                            </Col>
+                        </Row>
+                    )}
+                    {timeInputType === 'relative' && (
+                        <Row>
+                            <Col xs={12}>
+                                <InputGroup>
+                                <InputGroup.Text id="basic-addon1">Time since last meal:</InputGroup.Text>
+                                    <Form.Control
+                                        type="number"
+                                        placeholder='Hours'
+                                        name="date"
+                                        value={state.hoursSinceBaseline}
+                                        onChange={(e) => {
+                                            dispatch(
+                                                formChange({
+                                                    hoursSinceBaseline: parseInt(e.target.value),
+                                                })
+                                            );
+                                        }}
+                                    />
+                                <InputGroup.Text id="basic-addon1">:</InputGroup.Text>
+
+                                    <Form.Control
+                                        type="number"
+                                        placeholder='Minutes'
+
+                                        name="date"
+                                        value={state.minutesSinceBaseline}
+                                        onChange={(e) => {
+                                            dispatch(
+                                                formChange({
+                                                    minutesSinceBaseline: parseInt(e.target.value),
+                                                })
+                                            );
+                                        }}
+                                    />
+                                </InputGroup>
+                            </Col>
+                        </Row>
+                    )}
                     <Row>
                         <Col xs={12}>
                             <ButtonGroup style={{ display: 'flex' }}>

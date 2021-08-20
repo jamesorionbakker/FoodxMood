@@ -38,13 +38,24 @@
 
 //LIGHT GREEN
 button.button-light-green {
+    color: $font-brown;
+
     background-color: $button-green-light;
+    border-color: $button-green-light;
 }
 button.button-light-green:hover {
+    color: $font-brown;
+
     background-color: $button-green-light-hover;
+    border-color: $button-green-light;
+
 }
 button.button-light-green:focus {
+    color: $font-brown;
+
     background-color: $button-green-light-hover;
+    border-color: $button-green-light;
+
 }
 
 //DARK GREEN
@@ -61,4 +72,22 @@ button.button-light-green:focus {
 .button-dark-green:focus {
     color: $font-white;
     background-color: $button-green-dark-hover;
+}
+
+//LIGHT RED
+
+.button-light-red {
+    border-color: $button-light-red;
+    background-color: $button-light-red;
+    color: $font-brown;
+}
+.button-light-red:hover {
+    border-color: $button-light-red-hover;
+    background-color: $button-light-red-hover;
+    color: $font-brown;
+}
+.button-light-red:focus {
+    border-color: $button-light-red-hover;
+    background-color: $button-light-red-hover;
+    color: $font-brown;
 }

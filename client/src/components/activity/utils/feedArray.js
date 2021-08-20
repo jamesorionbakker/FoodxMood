@@ -24,22 +24,45 @@ function copyObjToArray(dataObject) {
     });
 }
 
+function flagMissingHealthChecks(array) {
+    let activityArray = [...array]
+    return activityArray.map((entry, i, activityArray) => {
+        if (entry.type === 'meal') {
+            entry.missingHealthCheck = true;
+            if (i === 0) return entry;
+            if (activityArray[i - 1].type !== 'healthCheck') return entry;
+            entry.missingHealthCheck = false;
+            return entry;
+        }
+        return entry;
+    });
+}
+
 export const build = (activityEntriesObj) => {
-    let activityEntriesArrSorted = copyObjToArray(activityEntriesObj).sort((a, b) => b.time - a.time);
-    return activityEntriesArrSorted.reduce((output, currEntry, index, currArray) => {
-        currEntry.date = unixTimeToDate(currEntry.time);
-        if (index === 0) {
+    let activityEntriesArrSorted = copyObjToArray(activityEntriesObj).sort(
+        (a, b) => b.time - a.time
+    );
+    // let activityEntriesArrFLagged = flagMissingHealthChecks(activityEntriesArrSorted)
+    let activityArrayByDate = activityEntriesArrSorted.reduce(
+        (output, currEntry, index, currArray) => {
+            currEntry.date = unixTimeToDate(currEntry.time);
+            if (index === 0) {
+                output.push([currEntry]);
+                return output;
+            }
+            let lastEntry = currArray[index - 1];
+            if (lastEntry.date === currEntry.date) {
+                output[output.length - 1].push(currEntry);
+                return output;
+            }
             output.push([currEntry]);
             return output;
-        }
-        let lastEntry = currArray[index - 1];
-        if (lastEntry.date === currEntry.date) {
-            output[output.length - 1].push(currEntry);
-            return output;
-        }
-        output.push([currEntry]);
-        return output;
-    }, []);
+        },
+        []
+    );
+    return activityArrayByDate.map((dayOfActivity) => {
+        return (flagMissingHealthChecks(dayOfActivity));
+    });
 };
 
 //OLD HARD TO READ CODE

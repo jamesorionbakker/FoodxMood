@@ -109,7 +109,7 @@ export function insertEntryLocal(newEntry) {
             type: 'ACTIVITY/INSERT_ENTRY_LOCAL',
             payload: { [newEntry._id]: newEntry },
         });
-        dispatch(incrementLocalEntryCount());
+        dispatch(incrementLocalEntryCount(1));
     };
 }
 

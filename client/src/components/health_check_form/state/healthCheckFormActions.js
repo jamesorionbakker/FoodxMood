@@ -45,6 +45,19 @@ export function newHealthCheck() {
         },
     };
 }
+
+export function newRelativeHealthCheck(baselineTime) {
+    console.log('new meal action');
+    return {
+        type: 'HEALTH_CHECK_FORM/NEW_RELATIVE',
+        payload: {
+            new: true,
+            show: true,
+            baselineTime
+        },
+    };
+}
+
 export function closeHealthCheckForm() {
     return {
         type: 'HEALTH_CHECK_FORM/CLOSE',

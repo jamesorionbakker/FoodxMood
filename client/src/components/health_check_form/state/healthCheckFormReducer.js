@@ -8,15 +8,21 @@ const initialState = {
     edit: false,
     dateString: '',
     timeString: '',
+    timeInputType: 'absolute',
+    baselineTime: 0,
+    hoursSinceBaseline: '',
+    minutesSinceBaseline: ''
 };
 
-export default function HealtCheckFormReducer(state = initialState, action) {
+export default function HealthCheckFormReducer(state = initialState, action) {
     let { payload } = action;
     switch (action.type) {
         case 'HEALTH_CHECK_FORM/EDIT':
             return { ...initialState, ...payload };
         case 'HEALTH_CHECK_FORM/NEW':
             return { ...initialState, ...payload };
+        case 'HEALTH_CHECK_FORM/NEW_RELATIVE':
+            return { ...initialState, ...payload, timeInputType: 'relative' };
         case 'HEALTH_CHECK_FORM/DELETE_SYMPTOM':
             let symptoms = state.symptoms.filter(
                 (symptom) => symptom !== payload

@@ -36,7 +36,7 @@ export default function Activity(props) {
                         return <DateBlock key={index} index={index} entries={dateBlock} />;
                     })}
                     {/* LOADED ENTRIES MESSAGE (example: 10 of 25...)*/}
-                    <div style={{ textAlign: 'center', marginBottom: '-1rem' }}>
+                    <div style={{ textAlign: 'center'}}>
                         <em style={{ fontSize: '.8em'}}>
                             viewing {localEntriesCount} of {totalEntriesCount}
                         </em>
